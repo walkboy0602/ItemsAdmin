@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="LastIP" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="LoginCounter" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="Binary" MaxLength="50" FixedLength="false" Nullable="false" />
+    <Property Name="LastIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LoginCounter" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AccountType">
+    <Key>
+      <PropertyRef Name="AccountID" />
+      <PropertyRef Name="Type" />
+    </Key>
+    <Property Name="AccountID" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="Byte" Nullable="false" />
+    <Property Name="ExpireDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ListingImageDeleted">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="ListingID" />
+      <PropertyRef Name="IsCover" />
+      <PropertyRef Name="isDeleted" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ListingID" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="IsCover" Type="Boolean" Nullable="false" />
+    <Property Name="Sort" Type="Byte" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Src" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RefType">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Description" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RefValue">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="TypeID" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ValueCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TypeID" Type="Byte" Nullable="false" />
+    <Property Name="Order" Type="Byte" />
+    <Property Name="CssClass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="CountryCode" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Level" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Level" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RegionZone">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="RegionID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegionID" Type="Int32" Nullable="false" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="longitude" Type="Decimal" Precision="9" Scale="6" />
+    <Property Name="latitude" Type="Decimal" Precision="9" Scale="6" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sort" Type="Int32" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="AccountID" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Mobile" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ShopDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
+    <EntitySet Name="ListingImageDeleteds" EntityType="Self.ListingImageDeleted" />
+    <EntitySet Name="RefTypes" EntityType="Self.RefType" />
+    <EntitySet Name="RefValues" EntityType="Self.RefValue" />
+    <EntitySet Name="Regions" EntityType="Self.Region" />
+    <EntitySet Name="RegionZones" EntityType="Self.RegionZone" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="RefCategories" EntityType="ShopDBModel.RefCategory" />
+    <EntitySet Name="Listings" EntityType="ShopDBModel.Listing" />
+    <AssociationSet Name="FK_RefCategory_CategoryID" Association="ShopDBModel.FK_RefCategory_CategoryID">
+      <End Role="RefCategory" EntitySet="RefCategories" />
+      <End Role="Listing" EntitySet="Listings" />
+    </AssociationSet>
+    <EntitySet Name="ListingImages" EntityType="ShopDBModel.ListingImage" />
+    <AssociationSet Name="FK_Listing_ListingID" Association="ShopDBModel.FK_Listing_ListingID">
+      <End Role="Listing" EntitySet="Listings" />
+      <End Role="ListingImage" EntitySet="ListingImages" />
+    </AssociationSet>
+    <EntitySet Name="ListingSpecs" EntityType="ShopDBModel.ListingSpec" />
+    <AssociationSet Name="FK__ListingSp__Listi__2F10007B" Association="ShopDBModel.FK__ListingSp__Listi__2F10007B">
+      <End Role="Listing" EntitySet="Listings" />
+      <End Role="ListingSpec" EntitySet="ListingSpecs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="RefCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="MetaDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MetaKeyword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="isActive" Type="Boolean" />
+    <NavigationProperty Name="Listings" Relationship="ShopDBModel.FK_RefCategory_CategoryID" FromRole="RefCategory" ToRole="Listing" />
+  </EntityType>
+  <EntityType Name="Listing">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="Status" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UpdateBy" Type="Int32" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="RefCategory" Relationship="ShopDBModel.FK_RefCategory_CategoryID" FromRole="Listing" ToRole="RefCategory" />
+    <Property Name="Currency" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsNegotiable" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ListingImages" Relationship="ShopDBModel.FK_Listing_ListingID" FromRole="Listing" ToRole="ListingImage" />
+    <NavigationProperty Name="ListingSpecs" Relationship="ShopDBModel.FK__ListingSp__Listi__2F10007B" FromRole="Listing" ToRole="ListingSpec" />
+  </EntityType>
+  <Association Name="FK_RefCategory_CategoryID">
+    <End Type="ShopDBModel.RefCategory" Role="RefCategory" Multiplicity="1" />
+    <End Type="ShopDBModel.Listing" Role="Listing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RefCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Listing">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ListingImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ListingID" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="IsCover" Type="Boolean" Nullable="false" />
+    <Property Name="Sort" Type="Byte" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Src" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Listing" Relationship="ShopDBModel.FK_Listing_ListingID" FromRole="ListingImage" ToRole="Listing" />
+    <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Listing_ListingID">
+    <End Type="ShopDBModel.Listing" Role="Listing" Multiplicity="1" />
+    <End Type="ShopDBModel.ListingImage" Role="ListingImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listing">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListingImage">
+        <PropertyRef Name="ListingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ListingSpec">
+    <Key>
+      <PropertyRef Name="ListingID" />
+      <PropertyRef Name="Attribute" />
+    </Key>
+    <Property Name="ListingID" Type="Int32" Nullable="false" />
+    <Property Name="Attribute" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Listing" Relationship="ShopDBModel.FK__ListingSp__Listi__2F10007B" FromRole="ListingSpec" ToRole="Listing" />
+  </EntityType>
+  <Association Name="FK__ListingSp__Listi__2F10007B">
+    <End Type="ShopDBModel.Listing" Role="Listing" Multiplicity="1" />
+    <End Type="ShopDBModel.ListingSpec" Role="ListingSpec" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listing">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListingSpec">
+        <PropertyRef Name="ListingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

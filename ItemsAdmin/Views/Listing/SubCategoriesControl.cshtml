@@ -1,0 +1,13 @@
+﻿@model MonsterAdmin.Models.ListingModels
+
+@if (ViewBag.SubCategories != null && ViewBag.SubCategories.Count() > 0)
+{
+    using (Ajax.BeginForm("SelectSubCategory", "CascadingDropDown", new AjaxOptions { UpdateTargetId = "Products" }))
+    {
+        @Html.HiddenFor(m => m.CategoryID)
+        @Html.DropDownListFor(
+                m => m.SubCategoryID,
+                (IEnumerable<SelectListItem>)ViewBag.SubCategories,
+                new { @class = "form-control" })
+    }
+}

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShopDBModelStoreContainer" CdmEntityContainer="ShopDBEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="ShopDBModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LastIP" ColumnName="LastIP" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LoginCounter" ColumnName="LoginCounter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccountTypes">
+      <EntityTypeMapping TypeName="ShopDBModel.AccountType">
+        <MappingFragment StoreEntitySet="AccountType">
+          <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListingImageDeleteds">
+      <EntityTypeMapping TypeName="ShopDBModel.ListingImageDeleted">
+        <MappingFragment StoreEntitySet="ListingImageDeleted">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ListingID" ColumnName="ListingID" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="IsCover" ColumnName="IsCover" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Src" ColumnName="Src" />
+          <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RefTypes">
+      <EntityTypeMapping TypeName="ShopDBModel.RefType">
+        <MappingFragment StoreEntitySet="RefType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RefValues">
+      <EntityTypeMapping TypeName="ShopDBModel.RefValue">
+        <MappingFragment StoreEntitySet="RefValue">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ValueCode" ColumnName="ValueCode" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="CssClass" ColumnName="CssClass" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regions">
+      <EntityTypeMapping TypeName="ShopDBModel.Region">
+        <MappingFragment StoreEntitySet="Region">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegionZones">
+      <EntityTypeMapping TypeName="ShopDBModel.RegionZone">
+        <MappingFragment StoreEntitySet="RegionZone">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="sort" ColumnName="sort" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ShopDBModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RefCategories">
+      <EntityTypeMapping TypeName="ShopDBModel.RefCategory">
+        <MappingFragment StoreEntitySet="RefCategory">
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="MetaKeyword" ColumnName="MetaKeyword" />
+          <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Listings">
+      <EntityTypeMapping TypeName="ShopDBModel.Listing">
+        <MappingFragment StoreEntitySet="Listing">
+          <ScalarProperty Name="IsNegotiable" ColumnName="IsNegotiable" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListingImages">
+      <EntityTypeMapping TypeName="ShopDBModel.ListingImage">
+        <MappingFragment StoreEntitySet="ListingImage">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Src" ColumnName="Src" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="IsCover" ColumnName="IsCover" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="ListingID" ColumnName="ListingID" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListingSpecs">
+      <EntityTypeMapping TypeName="ShopDBModel.ListingSpec">
+        <MappingFragment StoreEntitySet="ListingSpec">
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Attribute" ColumnName="Attribute" />
+          <ScalarProperty Name="ListingID" ColumnName="ListingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

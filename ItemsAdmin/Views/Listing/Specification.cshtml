@@ -1,0 +1,99 @@
+﻿@model MonsterAdmin.Models.Listing
+
+@{
+    ViewBag.Title = "Specification";
+}
+<div data-ng-app="shopApp" data-ng-controller="ListingSpecCtrl">
+
+    <div class="header-row">
+        <div class="header-main">
+            <i class="fa fa-tags"></i>
+            <span class="breadcrumb">
+                @Html.ActionLink("Listings", "index")
+            </span>
+            /
+            <span>Specification</span>
+        </div>
+        <div class="header-right">
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn" })
+            <input type="button" class="btn-glow success btn-finish" value="Save" data-ng-click="saveData()">
+        </div>
+    </div>
+
+    <div class="row ctrls">
+        @RenderPage("_menu.cshtml")
+
+        <div class="tab-content">
+            <div class="table-wrapper products-table section">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-md-2">
+                                <span class="line"></span>Attribute
+                            </th>
+                            <th class="col-md-6">
+                                <span class="line"></span>Description
+                            </th>
+                            <th class="col-md-2">
+                                <span class="line"></span>Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="field in fields">
+                            @*Display*@
+                            <td data-ng-show="!field.EditMode">
+                                <span>{{field.Attribute}}</span>
+                            </td>
+                            <td data-ng-show="!field.EditMode" data-ng-bind-html="field.Text"></td>
+                            <td data-ng-show="!field.EditMode">
+                                <i class="fa fa-edit fa-2x" data-ng-click="edit($index)"></i>
+                                &nbsp;&nbsp;&nbsp;
+                                <i class="fa fa-times fa-2x" data-ng-click="remove($index)"></i>
+                            </td>
+
+                            @*Edit Mode*@
+                            <td data-ng-show="field.EditMode">
+                                <input class="form-control" data-ng-model="field.Attribute" />
+                            </td>
+                            <td data-ng-show="field.EditMode">
+                                <textarea class="form-control ckEditorMini" data-ng-model="field.Text"></textarea>
+                            </td>
+                            <td data-ng-show="field.EditMode">
+                                <button type="button" class="btn-flat default new-product" data-ng-click="editSave($index)">Save</button>
+                                <button type="button" class="btn-flat white new-product" data-ng-click="cancel($index)">Cancel</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            @*New*@
+                            <td>
+                                <input class="form-control" placeholder="e.g - Warrently" data-ng-model="form.Attribute" />
+                            </td>
+                            <td>
+                                <textarea class="form-control ckEditorMini" data-ng-model="form.Text"></textarea>
+                                @*<textarea id="editor1" data-ng-model="form.Text"></textarea>*@
+                            </td>
+                            <td>
+                                <button type="button" class="btn-flat default new-product" data-ng-click="add()">Add</button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/ckeditor")
+
+
+<script type="text/javascript">
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('editor1', 
+        {
+            height: 500
+        });
+</script>

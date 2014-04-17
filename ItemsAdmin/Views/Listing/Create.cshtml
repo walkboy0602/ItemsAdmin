@@ -1,0 +1,55 @@
+﻿@model MonsterAdmin.Models.Listing
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="header-row">
+        <div class="header-main">
+            <i class="fa fa-tags"></i>
+            <span class="breadcrumb">
+                @Html.ActionLink("Listings", "index")
+            </span>
+            /
+            <span>Add Listing</span>
+        </div>
+        <div class="header-right">
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn" })
+            <input type="submit" class="btn-glow success btn-finish" value="Save">
+        </div>
+    </div>
+
+    <div class="row ctrls">
+        <ul id="tabs" class="nav nav-tabs">
+            <li class="active"><a href="#general" data-toggle="tab">General Info</a></li>
+            <li class="disabled disabledTab"><a href="#profile" data-toggle="tab">Image</a></li>
+            <li class="disabled disabledTab"><a href="#messages" data-toggle="tab">Additional Info</a></li>
+            <li class="disabled disabledTab"><a href="#messages" data-toggle="tab">Specification</a></li>
+        </ul>
+
+        <div class="row form-wrapper">
+            <div class="tab-content">
+                @RenderPage("_general.cshtml")
+            </div>
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+    });
+
+    function isDecimal(e) {
+        if (e.charCode == 46 || e.charCode == 44) {
+            var currentContents = $input.val();
+            return !(currentContents.indexOf(',') !== -1 || currentContents.indexOf('.') !== -1);
+        }
+        return (e.charCode >= 48 && e.charCode <= 57) || e.charCode === 0;
+    }
+</script>
+

@@ -1,0 +1,64 @@
+﻿@model MonsterAdmin.Models.RefCategory
+
+<div class="row form-wrapper">
+
+    <div class="col-md-12">
+        <div class="col-md-8">
+            <div class="field-box">
+                <label>Category Name</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control inline-input", placeholder = "Enter Name here." })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Parent Category</label>
+                <div class="col-md-8">
+                    @Html.DropDownListFor(m => m.ParentID, ViewBag.Categories as IEnumerable<SelectListItem>, "-", new { @class = "form-control" })
+                    @*@Html.DropDownGroupListFor(m => m.ParentID, ViewBag.Categories as IEnumerable<GroupedSelectListItem>, "",
+                        new
+                        {
+                            @class = "form-control",
+                            @data_val = "true",  // for Required Validation
+                            @data_val_required = "The Name field is required." // for Required Validation
+                        })*@
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Description</label>
+                <div class="col-md-8">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", placeholder = "Some Description." })
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Meta Description</label>
+                <div class="col-md-8">
+                    @Html.TextAreaFor(m => m.MetaDescription, new { @class = "form-control", placeholder = "Meta Description." })
+                    @Html.ValidationMessageFor(m => m.MetaDescription)
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Meta Keyword</label>
+                <div class="col-md-8">
+                    @Html.TextAreaFor(m => m.MetaKeyword, new { @class = "form-control", placeholder = "Meta Keyword." })
+                    @Html.ValidationMessageFor(m => m.MetaKeyword)
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Status</label>
+                <div class="col-md-8">
+                    <label class="radio">
+                        @Html.RadioButtonFor(model => model.isActive, true, new { Checked = "checked" }) &nbsp;
+                        <span class="label label-success">Active</span>
+                    </label>
+                    <label class="radio">
+                        @Html.RadioButtonFor(model => model.isActive, false) &nbsp;
+                        <span class="label label-danger">Inactive</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

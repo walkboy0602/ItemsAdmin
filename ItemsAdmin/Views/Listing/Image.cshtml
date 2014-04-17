@@ -1,0 +1,148 @@
+﻿@model MonsterAdmin.Models.Listing
+
+@{
+    ViewBag.Title = "Image";
+}
+
+<div class="header-row">
+    <div class="header-main">
+        <i class="fa fa-tags"></i>
+        <span class="breadcrumb">
+            @Html.ActionLink("Listings", "index")
+        </span>
+        /
+        <span>Upload Image</span>
+    </div>
+    <div class="header-right">
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn" })
+        <input type="submit" class="btn-glow success btn-finish" value="Save">
+    </div>
+</div>
+
+
+<div class="row ctrls" data-ng-app="shopApp">
+    @RenderPage("_menu.cshtml")
+
+    <div data-ng-controller="ListingImageCtrl">
+        <div class="row form-wrapper gallery">
+            <div class="tab-content">
+                <div class="tab-pane active" id="image">
+
+                    @Html.HiddenFor(model => model.id)
+                    @Html.HiddenFor(model => model.CreateDate)
+                    <form name="formUpload" method="post" fileupload enctype="multipart/form-data" action="/listing/imageupload">
+                        <!-- No File -->
+                        <div class="no-gallery" data-ng-show="!draftFiles.length && !files.length">
+                            <div class="center">
+                                <img src="http://detail.herokuapp.com/img/no-img-gallery.png" alt="no-gallery">
+                                <h6>You don't have any images</h6>
+                                <p>Click 'Add Image' to attach photos or drag & drop your photos here.</p>
+
+                                <div class="btn-glow primary fileinput-button">
+                                    <i class="fa fa-plus"></i>
+                                    <input name="image" type="file" data-url="/listing/upload" multiple upload />
+                                    <span>Add new image</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gallery-wrapper" data-ng-show="files.length">
+                            <div class="row gallery-row">
+                                <!-- Image -->
+                                <div class="col-xs-6 col-md-3 img-container" data-ng-repeat="file in files">
+                                    <div class="img-box">
+                                        <span class="icon edit" data-ng-click="edit(file)">
+                                            <a><i class="gallery-edit"></i></a>
+                                        </span>
+                                        <span class="icon trash" data-ng-click="delete(file)">
+                                            <i class="gallery-trash"></i>
+                                        </span>
+                                        <img data-ng-src="{{file.Url}}" class="img-responsive" alt="picture">
+                                        <p class="title" data-ng-show="file.Description">
+                                            {{file.Description}}
+                                        </p>
+                                        <p class="title" data-ng-show="!file.Description">
+                                            &lt;No Description&gt;
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Spinner -->
+                                <div data-ng-repeat="file in draftFiles">
+                                    <div class="col-xs-6 col-md-3 img-container">
+                                        <div class="img-box">
+                                            <div class="spin-{{$index + 1}} img-spin-box"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- new image button -->
+                                <div class="col-xs-6 col-md-3 new-img">
+                                    <div class="img-box">
+                                        <label for="file-input">
+                                            <img src="http://detail.herokuapp.com/img/new-gallery-img.png" />
+                                        </label>
+                                        <input id="file-input" name="image" type="file" multiple accept="image/*" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal - Edit Description -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Edit Image Description</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="input1" class="col-lg-2 control-label">Description:</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" placeholder="Max 30 characters" maxlength="30" data-ng-model="file.Description">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-ng-click="changeDesc()">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- Modal - Delete Image -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Are you sure you want to delete - {{file.Description}} ?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <img data-ng-src="{{file.Url}}" class="img-responsive" alt="picture">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-ng-click="deleteImage()">Delete</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+    });
+
+</script>
+

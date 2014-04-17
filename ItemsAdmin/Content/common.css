@@ -1,0 +1,70 @@
+﻿.validation-summary-errors, .field-validation-error {
+    color: #c73939;
+}
+
+    .validation-summary-errors ul li:before {
+        content: "\f05c";
+        font-family: FontAwesome;
+        margin-right: 10px;
+        display: inline;
+        vertical-align: middle;
+    }
+
+    .validation-summary-errors ul li {
+        list-style-type: none;
+    }
+
+.breadcrumb a, .breadcrumb a:hover {
+    color: #999;
+}
+
+.checkbox {
+    margin-top: 0;
+}
+
+.disabledTab {
+    pointer-events: none;
+}
+
+.header-row {
+    display: block;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 20px;
+    font-size: 21px;
+    line-height: inherit;
+    color: #333333;
+    border: 0;
+}
+
+.header-row-border {
+    display: block;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 20px;
+    font-size: 21px;
+    line-height: inherit;
+    color: #333333;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.header-main {
+    font-size: 24px;
+    text-align: left;
+    line-height: 32px;
+    font-family: ProximaNovaLight,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 300;
+    white-space: nowrap;
+}
+
+    .header-main .breadcrumb {
+        background-color: transparent;
+        padding: 0;
+    }
+
+.header-right {
+    position: absolute;
+    top: 50px;
+    right: 58px;
+}

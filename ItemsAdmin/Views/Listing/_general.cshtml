@@ -1,0 +1,64 @@
+﻿@model MonsterAdmin.Models.Listing
+
+<div class="tab-pane active" id="general">
+    <div class="col-md-12">
+        @Html.Partial("_validationSummary")
+        <div class="col-md-8">
+            <div class="field-box">
+                <label>Title</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control inline-input", placeholder = "Enter Title here." })
+                    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-inline" })
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Category</label>
+                <div class="col-md-8">
+                    @Html.DropDownListFor(m => m.CategoryID, ViewBag.Categories as IEnumerable<SelectListItem>, "-", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CategoryID, null, new { @class = "help-inline" })
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Description</label>
+                <div class="col-md-8">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @rows = "4" })
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Price</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            @Html.DropDownListFor(m => m.Currency, ViewBag.Currencies as IEnumerable<SelectListItem>, "-")
+                        </div>
+                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @type = "number", @step = 0.01, @placeholder = "e.g. - 99.90" })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Currency, null, new { @class = "help-inline" })
+                    <br />
+                    @Html.ValidationMessageFor(m => m.Price, null, new { @class = "help-inline" })
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Negotiable</label>
+                <div class="col-md-8 ">
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(m => m.IsNegotiable)
+                            Yes
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- call this page plugins -->
+<script type="text/javascript">
+    $(function () {
+
+        // add uniform plugin styles to html elements
+        $("input:checkbox, input:radio").uniform();
+
+    });
+</script>
