@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Description";
+}
+
+<div data-ng-app="shopApp" data-ng-controller="ListingDescriptionCtrl">
+    <div class="header-row">
+        <div class="header-main">
+            <i class="fa fa-tags"></i>
+            <span class="breadcrumb">
+                @Html.ActionLink("Listings", "index")
+            </span>
+            /
+            <span>Description</span>
+        </div>
+        <div class="header-right">
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn" })
+            <input type="button" class="btn-glow success btn-finish" value="Save" data-ng-click="saveData()">
+        </div>
+    </div>
+
+    <div class="row ctrls">
+        @RenderPage("_menu.cshtml")
+        <form>
+            <div class="row form-wrapper">
+                <div class="tab-content">
+                    <div class="col-md-12">
+                        <div class="field-box">
+                            <textarea class="form-control ckEditor" data-ng-model="form.Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

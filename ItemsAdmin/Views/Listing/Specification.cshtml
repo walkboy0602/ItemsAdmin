@@ -22,71 +22,69 @@
 
     <div class="row ctrls">
         @RenderPage("_menu.cshtml")
+        <form>
+            <div class="tab-content">
+                <div class="table-wrapper products-table section">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-md-2">
+                                    <span class="line"></span>Attribute
+                                </th>
+                                <th class="col-md-6">
+                                    <span class="line"></span>Description
+                                </th>
+                                <th class="col-md-2">
+                                    <span class="line"></span>Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="field in fields">
+                                @*Display*@
+                                <td data-ng-show="!field.EditMode">
+                                    <span>{{field.Attribute}}</span>
+                                </td>
+                                <td data-ng-show="!field.EditMode" data-ng-bind-html="field.Text"></td>
+                                <td data-ng-show="!field.EditMode">
+                                    <i class="fa fa-edit fa-2x" data-ng-click="edit($index)"></i>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-times fa-2x" data-ng-click="remove($index)"></i>
+                                </td>
 
-        <div class="tab-content">
-            <div class="table-wrapper products-table section">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th class="col-md-2">
-                                <span class="line"></span>Attribute
-                            </th>
-                            <th class="col-md-6">
-                                <span class="line"></span>Description
-                            </th>
-                            <th class="col-md-2">
-                                <span class="line"></span>Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-ng-repeat="field in fields">
-                            @*Display*@
-                            <td data-ng-show="!field.EditMode">
-                                <span>{{field.Attribute}}</span>
-                            </td>
-                            <td data-ng-show="!field.EditMode" data-ng-bind-html="field.Text"></td>
-                            <td data-ng-show="!field.EditMode">
-                                <i class="fa fa-edit fa-2x" data-ng-click="edit($index)"></i>
-                                &nbsp;&nbsp;&nbsp;
-                                <i class="fa fa-times fa-2x" data-ng-click="remove($index)"></i>
-                            </td>
+                                @*Edit Mode*@
+                                <td data-ng-show="field.EditMode">
+                                    <input class="form-control" data-ng-model="field.Attribute" />
+                                </td>
+                                <td data-ng-show="field.EditMode">
+                                    <textarea class="form-control ckEditorMini" data-ng-model="field.Text"></textarea>
+                                </td>
+                                <td data-ng-show="field.EditMode">
+                                    <button type="button" class="btn-flat default new-product" data-ng-click="editSave($index)">Save</button>
+                                    <button type="button" class="btn-flat white new-product" data-ng-click="cancel($index)">Cancel</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                @*Save New*@
+                                <td>
+                                    <input class="form-control validate[required]" placeholder="e.g - Warrently" data-ng-model="form.Attribute" maxlength="20" />
+                                </td>
+                                <td>
+                                    <textarea class="form-control ckEditorMini" data-ng-model="form.Text"></textarea>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn-flat default new-product" data-ng-click="saveNew()">Add</button>
+                                </td>
+                            </tr>
+                        </tbody>
 
-                            @*Edit Mode*@
-                            <td data-ng-show="field.EditMode">
-                                <input class="form-control" data-ng-model="field.Attribute" />
-                            </td>
-                            <td data-ng-show="field.EditMode">
-                                <textarea class="form-control ckEditorMini" data-ng-model="field.Text"></textarea>
-                            </td>
-                            <td data-ng-show="field.EditMode">
-                                <button type="button" class="btn-flat default new-product" data-ng-click="editSave($index)">Save</button>
-                                <button type="button" class="btn-flat white new-product" data-ng-click="cancel($index)">Cancel</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            @*New*@
-                            <td>
-                                <input class="form-control" placeholder="e.g - Warrently" data-ng-model="form.Attribute" />
-                            </td>
-                            <td>
-                                <textarea class="form-control ckEditorMini" data-ng-model="form.Text"></textarea>
-                                @*<textarea id="editor1" data-ng-model="form.Text"></textarea>*@
-                            </td>
-                            <td>
-                                <button type="button" class="btn-flat default new-product" data-ng-click="add()">Add</button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    </table>
 
-                </table>
-
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
-
-@Scripts.Render("~/bundles/ckeditor")
 
 
 <script type="text/javascript">

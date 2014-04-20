@@ -18,6 +18,7 @@ namespace MonsterAdmin.Models
         {
             this.ListingImages = new HashSet<ListingImage>();
             this.ListingSpecs = new HashSet<ListingSpec>();
+            this.ListingOptions = new HashSet<ListingOption>();
         }
     
         public int id { get; set; }
@@ -36,5 +37,6 @@ namespace MonsterAdmin.Models
         public virtual RefCategory RefCategory { get; set; }
         public virtual ICollection<ListingImage> ListingImages { get; set; }
         public virtual ICollection<ListingSpec> ListingSpecs { get; set; }
+        public virtual ICollection<ListingOption> ListingOptions { get; set; }
     }
 }

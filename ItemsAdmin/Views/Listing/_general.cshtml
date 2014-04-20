@@ -6,36 +6,38 @@
         <div class="col-md-8">
             <div class="field-box">
                 <label>Title</label>
-                <div class="col-md-8">
+                <div class="col-md-6">
                     @Html.TextBoxFor(m => m.Title, new { @class = "form-control inline-input", placeholder = "Enter Title here." })
                     @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-inline" })
                 </div>
             </div>
             <div class="field-box">
                 <label>Category</label>
-                <div class="col-md-8">
-                    @Html.DropDownListFor(m => m.CategoryID, ViewBag.Categories as IEnumerable<SelectListItem>, "-", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.CategoryID, null, new { @class = "help-inline" })
+                <div class="col-md-6">
+                    @Html.DropDownListFor(m => m.CategoryID, ViewBag.Categories as IEnumerable<SelectListItem>, "",
+                                      new { @id = "s2Category", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CategoryID, null, new {  @class = "help-inline" })
                 </div>
             </div>
+      
             <div class="field-box">
-                <label>Description</label>
-                <div class="col-md-8">
-                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @rows = "4" })
-                </div>
-            </div>
-            <div class="field-box">
-                <label>Price</label>
-                <div class="col-md-8">
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            @Html.DropDownListFor(m => m.Currency, ViewBag.Currencies as IEnumerable<SelectListItem>, "-")
-                        </div>
-                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @type = "number", @step = 0.01, @placeholder = "e.g. - 99.90" })
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Currency, null, new { @class = "help-inline" })
-                    <br />
+                <label>Original Price</label>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @placeholder = "RM" })
                     @Html.ValidationMessageFor(m => m.Price, null, new { @class = "help-inline" })
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.Currency, new { Value = "RM" })
+            <div class="field-box">
+                <label>Discounted Price</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text"/>
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Available Quantity</label>
+                <div class="col-md-2">
+                   <input class="form-control" type="number" value="1" />
                 </div>
             </div>
             <div class="field-box">
@@ -55,10 +57,10 @@
 
 <!-- call this page plugins -->
 <script type="text/javascript">
-    $(function () {
 
-        // add uniform plugin styles to html elements
-        $("input:checkbox, input:radio").uniform();
-
+    $(document).ready(function () {
+        $('#s2Category').select2({
+            placeholder: "Select a Category"
+        });
     });
 </script>

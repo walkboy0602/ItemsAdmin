@@ -12,11 +12,14 @@ namespace MonsterAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ListingSpec
+    public partial class ListingOption
     {
         public int ListingID { get; set; }
-        public string Attribute { get; set; }
-        public string Text { get; set; }
+        public string Title { get; set; }
+        public Nullable<decimal> OriginalPrice { get; set; }
+        public Nullable<decimal> DiscountedPrice { get; set; }
+        public Nullable<short> Quantity { get; set; }
+        public Nullable<int> LinkToImage { get; set; }
         public short Sort { get; set; }
     
         public virtual Listing Listing { get; set; }

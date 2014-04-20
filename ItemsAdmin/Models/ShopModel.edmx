@@ -41,7 +41,7 @@ warning 6002: The table/view 'ShopDB.dbo.AccountType' does not have a primary ke
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="Description" Type="text" />
           <Property Name="Currency" Type="varchar" MaxLength="10" />
           <Property Name="Price" Type="decimal" Precision="9" Scale="2" />
           <Property Name="Status" Type="char" MaxLength="2" />
@@ -82,14 +82,28 @@ warning 6002: The table/view 'ShopDB.dbo.ListingImageDeleted' does not have a pr
           <Property Name="Src" Type="nvarchar" MaxLength="200" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ListingOption">
+          <Key>
+            <PropertyRef Name="ListingID" />
+            <PropertyRef Name="Sort" />
+          </Key>
+          <Property Name="ListingID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="OriginalPrice" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="DiscountedPrice" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="Quantity" Type="smallint" />
+          <Property Name="LinkToImage" Type="int" />
+          <Property Name="Sort" Type="smallint" Nullable="false" />
+        </EntityType>
         <EntityType Name="ListingSpec">
           <Key>
             <PropertyRef Name="ListingID" />
-            <PropertyRef Name="Attribute" />
+            <PropertyRef Name="Sort" />
           </Key>
           <Property Name="ListingID" Type="int" Nullable="false" />
           <Property Name="Attribute" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Text" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Sort" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="RefCategory">
           <Key>
@@ -215,9 +229,22 @@ warning 6002: The table/view 'ShopDB.dbo.User' does not have a primary key defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ListingOption_ListingID_FK">
+          <End Role="Listing" Type="Self.Listing" Multiplicity="1" />
+          <End Role="ListingOption" Type="Self.ListingOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Listing">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListingOption">
+              <PropertyRef Name="ListingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ShopDBModelStoreContainer">
           <EntitySet Name="Listing" EntityType="Self.Listing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListingImage" EntityType="Self.ListingImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListingOption" EntityType="Self.ListingOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListingSpec" EntityType="Self.ListingSpec" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RefCategory" EntityType="Self.RefCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Account" EntityType="Self.Account" store:Type="Tables" store:Schema="dbo">
@@ -308,6 +335,10 @@ FROM [dbo].[User] AS [User]</DefiningQuery>
           <AssociationSet Name="FK_RefCategory_CategoryID" Association="Self.FK_RefCategory_CategoryID">
             <End Role="RefCategory" EntitySet="RefCategory" />
             <End Role="Listing" EntitySet="Listing" />
+          </AssociationSet>
+          <AssociationSet Name="ListingOption_ListingID_FK" Association="Self.ListingOption_ListingID_FK">
+            <End Role="Listing" EntitySet="Listing" />
+            <End Role="ListingOption" EntitySet="ListingOption" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -445,6 +476,11 @@ FROM [dbo].[User] AS [User]</DefiningQuery>
             <End Role="Listing" EntitySet="Listings" />
             <End Role="ListingSpec" EntitySet="ListingSpecs" />
           </AssociationSet>
+          <EntitySet Name="ListingOptions" EntityType="ShopDBModel.ListingOption" />
+          <AssociationSet Name="ListingOption_ListingID_FK" Association="ShopDBModel.ListingOption_ListingID_FK">
+            <End Role="Listing" EntitySet="Listings" />
+            <End Role="ListingOption" EntitySet="ListingOptions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="RefCategory">
           <Key>
@@ -467,7 +503,7 @@ FROM [dbo].[User] AS [User]</DefiningQuery>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Decimal" Precision="9" Scale="2" />
           <Property Name="Status" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="CreateBy" Type="Int32" />
@@ -479,6 +515,7 @@ FROM [dbo].[User] AS [User]</DefiningQuery>
           <Property Name="IsNegotiable" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ListingImages" Relationship="ShopDBModel.FK_Listing_ListingID" FromRole="Listing" ToRole="ListingImage" />
           <NavigationProperty Name="ListingSpecs" Relationship="ShopDBModel.FK__ListingSp__Listi__2F10007B" FromRole="Listing" ToRole="ListingSpec" />
+          <NavigationProperty Name="ListingOptions" Relationship="ShopDBModel.ListingOption_ListingID_FK" FromRole="Listing" ToRole="ListingOption" />
         </EntityType>
         <Association Name="FK_RefCategory_CategoryID">
           <End Type="ShopDBModel.RefCategory" Role="RefCategory" Multiplicity="1" />
@@ -521,11 +558,12 @@ FROM [dbo].[User] AS [User]</DefiningQuery>
         <EntityType Name="ListingSpec">
           <Key>
             <PropertyRef Name="ListingID" />
-            <PropertyRef Name="Attribute" />
+            <PropertyRef Name="Sort" />
           </Key>
           <Property Name="ListingID" Type="Int32" Nullable="false" />
           <Property Name="Attribute" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Text" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Listing" Relationship="ShopDBModel.FK__ListingSp__Listi__2F10007B" FromRole="ListingSpec" ToRole="Listing" />
         </EntityType>
         <Association Name="FK__ListingSp__Listi__2F10007B">
@@ -536,6 +574,32 @@ FROM [dbo].[User] AS [User]</DefiningQuery>
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="ListingSpec">
+              <PropertyRef Name="ListingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ListingOption">
+          <Key>
+            <PropertyRef Name="ListingID" />
+            <PropertyRef Name="Sort" />
+          </Key>
+          <Property Name="ListingID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalPrice" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="DiscountedPrice" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Quantity" Type="Int16" />
+          <Property Name="LinkToImage" Type="Int32" />
+          <Property Name="Sort" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Listing" Relationship="ShopDBModel.ListingOption_ListingID_FK" FromRole="ListingOption" ToRole="Listing" />
+        </EntityType>
+        <Association Name="ListingOption_ListingID_FK">
+          <End Type="ShopDBModel.Listing" Role="Listing" Multiplicity="1" />
+          <End Type="ShopDBModel.ListingOption" Role="ListingOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Listing">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListingOption">
               <PropertyRef Name="ListingID" />
             </Dependent>
           </ReferentialConstraint>
@@ -688,8 +752,22 @@ FROM [dbo].[User] AS [User]</DefiningQuery>
           <EntitySetMapping Name="ListingSpecs">
             <EntityTypeMapping TypeName="ShopDBModel.ListingSpec">
               <MappingFragment StoreEntitySet="ListingSpec">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="Attribute" ColumnName="Attribute" />
+                <ScalarProperty Name="ListingID" ColumnName="ListingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListingOptions">
+            <EntityTypeMapping TypeName="ShopDBModel.ListingOption">
+              <MappingFragment StoreEntitySet="ListingOption">
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="LinkToImage" ColumnName="LinkToImage" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="DiscountedPrice" ColumnName="DiscountedPrice" />
+                <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="ListingID" ColumnName="ListingID" />
               </MappingFragment>
             </EntityTypeMapping>

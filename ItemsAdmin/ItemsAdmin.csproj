@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FAF96928-6539-45B7-8528-32F33C2407FB}</ProjectGuid>
+    <ProjectGuid>{4C0E261C-FD41-4085-A506-921A4B649073}</ProjectGuid>
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -194,6 +194,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\ValidateOnlyIncomingValuesAttribute.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BootstrapSupport\ControlGroupExtensions.cs" />
     <Compile Include="BootstrapSupport\ViewHelperExtensions.cs" />
@@ -222,6 +223,9 @@
       <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ListingImageDeleted.cs">
+      <DependentUpon>ShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListingOption.cs">
       <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ListingSpec.cs">
@@ -780,6 +784,14 @@
     <Content Include="Scripts\jquery\knockout-2.2.0.js" />
     <Content Include="Scripts\jquery\modernizr-2.6.2.js" />
     <None Include="Scripts\jquery\_references.js" />
+    <Content Include="Scripts\select2\select2-bootstrap.css" />
+    <Content Include="Scripts\select2\select2-spinner.gif" />
+    <Content Include="Scripts\select2\select2.js" />
+    <Content Include="Scripts\select2\select2.png" />
+    <Content Include="Scripts\select2\select2x2.png" />
+    <Content Include="Scripts\select2\select2_locale_es.js" />
+    <Content Include="Scripts\validation\jquery.validationEngine.js" />
+    <Content Include="Scripts\validation\languages\jquery.validationEngine-en.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -829,7 +841,6 @@
     <Content Include="Views\Listing\Details.cshtml" />
     <Content Include="Views\Listing\Create.cshtml" />
     <Content Include="Views\Listing\Delete.cshtml" />
-    <Content Include="Views\Listing\Create2.cshtml" />
     <Content Include="Views\Shared\_validationSummary.cshtml" />
     <Content Include="Views\Shared\_BootstrapLayout.narrow.cshtml" />
     <Content Include="Views\Shared\_BootstrapLayout.empty.cshtml" />
@@ -840,6 +851,9 @@
     <Content Include="Views\Listing\_general.cshtml" />
     <Content Include="Views\Listing\_menu.cshtml" />
     <Content Include="Views\Listing\Specification.cshtml" />
+    <Content Include="Views\Listing\Description.cshtml" />
+    <Content Include="Scripts\select2\select2.jquery.json" />
+    <Content Include="Views\Listing\Option.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -78,8 +78,6 @@ function ListingCreateCtrl($scope, ListingFactory, $filter, $q, ListingManager) 
 
 }
 
-
-
 function ListingImageCtrl($scope, $q, ListingFactory, $filter, uploadManager) {
 
     $scope.files = [];
@@ -213,22 +211,42 @@ function ListingSpecCtrl($scope, $q, ListingFactory, $filter) {
     $scope.fields = [];
 
     //Retrieve Data
-    $q.all([ListingFactory.getSpecification($scope.id)]).then(function (results) {
-        var data = results[0].data;
-        console.log(data);
-        angular.forEach(data, function (v, k) {
-            $scope.fields.push({
-                ListingID: v.ListingID,
-                Attribute: v.Attribute,
-                Text: v.Text
-            });
-        });
-    });
+    $q.all([ListingFactory.getSpecification($scope.id)]).then(
 
-    $scope.add = function () {
-        $scope.fields.push($scope.form);
+        function (results) {
+            var data = results[0].data;
+            angular.forEach(data, function (v, k) {
+                $scope.fields.push({
+                    ListingID: v.ListingID,
+                    Attribute: v.Attribute,
+                    Text: v.Text,
+                    Sort: v.Sort
+                });
+            });
+        },
+
+        //error
+        function (response) {
+            console.log(response);
+        }
+
+    );
+
+
+    $scope.saveNew = function () {
+        validate.validationEngine('validate');
+
+        console.log(isValid);
+        if (!isValid) return;
+
+        $scope.fields.push({
+            ListingID: $scope.id,
+            Attribute: $scope.form.Attribute,
+            Text: $scope.form.Text,
+            Sort: $scope.fields.length + 1
+        });
+
         $scope.form = {};
-        $scope.form.ListingID = $scope.id;
     }
 
     $scope.edit = function (index) {
@@ -284,29 +302,173 @@ function ListingSpecCtrl($scope, $q, ListingFactory, $filter) {
 
 }
 
-shopApp.controller("ListingDetailCtrl", ['$scope', 'userFactory', '$route', 'referenceFactory', '$filter',
-    function ($scope, userFactory, $route, referenceFactory, $filter) {
+function ListingDescriptionCtrl($scope, $q, ListingFactory, $filter) {
 
-        //default option
-        //$scope.form.isWarrently = '0';
+    $scope.form = {};
+    $scope.form.id = $scope.id;
 
-        //init validation
-        var isValid = false;
-        var validate = jQuery("#form").validationEngine({
-            prettySelect: true,
-            onValidationComplete: function (form, status) {
-                isValid = status;
-            }
-        });
+    //Retrieve Data
+    $q.all([ListingFactory.getDescription($scope.id)]).then(
 
-        $scope.next = function () {
-            $('a[href="#contact"]').tab('show');
-            validate.validationEngine('validate');
-            if (isValid === false) {
-                return;
-            }
+        function (results) {
+            var data = results[0].data;
+            $scope.form.id = data.id;
+            $scope.form.Description = data.Description;
+        },
+
+        //error
+        function (response) {
+            console.log(response);
         }
 
-    }]);
+    );
 
+    $scope.saveData = function () {
+        console.log($scope.form);
+        ListingFactory.saveDescription($scope.form)
+                .success(function (data, status) {
+                    console.log('success');
+                })
+                .error(function (data, status) {
+                    console.log('error');
+                });
+    }
+
+}
+
+function ListingOptionCtrl($scope, $q, ListingFactory, $filter) {
+
+    $scope.form = {};
+    $scope.fields = [];
+
+    $scope.add = function () {
+        $scope.mode = 'addnew';
+        $scope.form = {};
+        $scope.form.ListingID = $scope.id;
+        $('#formModal').modal('show');
+    }
+
+    //Retrieve Data
+    $q.all([ListingFactory.getOption($scope.id)]).then(
+
+        function (results) {
+            var data = results[0].data;
+            angular.forEach(data, function (v, k) {
+                $scope.fields.push({
+                    ListingID: v.ListingID,
+                    Title: v.Title,
+                    OriginalPrice: v.OriginalPrice,
+                    DiscountedPrice: v.DiscountedPrice,
+                    Quantity: v.Quantity,
+                    LinkToImage: v.LinkToImage,
+                    Sort: v.Sort
+                });
+            });
+        },
+
+        //error
+        function (response) {
+            console.log(response);
+        }
+
+    );
+
+    //init validation
+    var isValid = false;
+    var validate = jQuery("form").validationEngine({
+        prettySelect: true,
+        onValidationComplete: function (form, status) {
+            isValid = status;
+        }
+    });
+
+    $scope.saveNew = function () {
+        validate.validationEngine('validate');
+        console.log(isValid);
+
+        if (!isValid) return;
+
+        ListingFactory.saveOption($scope.form)
+                .success(function (data, status) {
+                    console.log('success');
+                    $scope.fields.push({
+                        ListingID: data.ListingID,
+                        Title: data.Title,
+                        OriginalPrice: data.OriginalPrice,
+                        DiscountedPrice: data.DiscountedPrice,
+                        Quantity: data.Quantity,
+                        LinkToImage: data.LinkToImage,
+                        Sort: data.Sort
+                    });
+                    $('#formModal').modal('hide');
+                })
+                .error(function (data, status) {
+                    console.log('error');
+                });
+    }
+
+    //OPEN MODEL - EDIT
+    $scope.edit = function (index) {
+        angular.forEach($scope.fields, function (val, key) {
+            if (index === key) {
+                $scope.form = $scope.fields[key];
+                $scope.mode = 'edit';
+                $('#formModal').modal('show');
+            }
+        });
+    }
+
+    $scope.editSave = function () {
+        validate.validationEngine('validate');
+        console.log(isValid);
+
+        if (!isValid) return;
+
+        ListingFactory.editOption($scope.form)
+                .success(function (data, status) {
+                    console.log('success');
+
+                    angular.forEach($scope.fields, function (val, key) {
+                        if (data.Sort === val.Sort) {
+                            val.ListingID = data.ListingID,
+                            val.Title = data.Title,
+                            val.OriginalPrice = data.OriginalPrice,
+                            val.DiscountedPrice = data.DiscountedPrice,
+                            val.Quantity = data.Quantity,
+                            val.LinkToImage = data.LinkToImage,
+                            val.Sort = data.Sort
+                        }
+                    });
+
+                    $('#formModal').modal('hide');
+                })
+                .error(function (data, status) {
+                    console.log('error');
+                });
+    }
+
+    //OPEN MODEL - DELETE
+    $scope.delete = function (index) {
+        angular.forEach($scope.fields, function (val, key) {
+            if (index == key) {
+                $scope.form = $scope.fields[key];
+                $('#deleteModal').modal('show');
+            }
+        });
+    }
+
+    $scope.deleteConfirm = function () {
+        console.log('d');
+        ListingFactory.deleteOption($scope.form)
+             .success(function (data, status) {
+                 console.log('success');
+
+                 $('#deleteModal').modal('hide');
+             })
+            .error(function (data, status) {
+                console.log('error');
+            });
+    }
+
+}
 

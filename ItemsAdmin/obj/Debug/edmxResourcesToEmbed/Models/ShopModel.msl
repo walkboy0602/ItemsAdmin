@@ -143,8 +143,22 @@
     <EntitySetMapping Name="ListingSpecs">
       <EntityTypeMapping TypeName="ShopDBModel.ListingSpec">
         <MappingFragment StoreEntitySet="ListingSpec">
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
           <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="Attribute" ColumnName="Attribute" />
+          <ScalarProperty Name="ListingID" ColumnName="ListingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListingOptions">
+      <EntityTypeMapping TypeName="ShopDBModel.ListingOption">
+        <MappingFragment StoreEntitySet="ListingOption">
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="LinkToImage" ColumnName="LinkToImage" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="DiscountedPrice" ColumnName="DiscountedPrice" />
+          <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="ListingID" ColumnName="ListingID" />
         </MappingFragment>
       </EntityTypeMapping>

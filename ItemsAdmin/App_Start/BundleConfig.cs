@@ -33,6 +33,12 @@ namespace MonsterAdmin
                         "~/Scripts/jquery/jquery.unobtrusive*",
                         "~/Scripts/jquery/jquery.validate*"));
 
+            //Validation
+            bundles.Add(new ScriptBundle("~/bundles/validation").Include(
+                "~/Scripts/validation/languages/jquery.validationEngine-en.js", //Validation Engine English
+                "~/Scripts/validation/jquery.validationEngine.js" //Validation Engine
+                ));
+
             //Angular
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                  "~/Scripts/angular/1.2.9/angular.js",
@@ -63,8 +69,9 @@ namespace MonsterAdmin
                 ));
 
             //Listing e.g- ck editor, file uploader
-            bundles.Add(new ScriptBundle("~/bundles/ckeditor").Include(
-                "~/Scripts/ckeditor/ckeditor.js"
+            bundles.Add(new ScriptBundle("~/bundles/formplugin").Include(
+                "~/Scripts/ckeditor/ckeditor.js",
+                "~/Scripts/select2/select2.js"
                 ));
 
             //Bootstrap
@@ -80,6 +87,8 @@ namespace MonsterAdmin
                         "~/Content/themes/admin/bootstrap-overrides.css",
                         "~/Content/themes/admin/libraries/uniform.default.css",
                         "~/Content/themes/admin/libraries/select2.css",
+                        "~/Content/themes/admin/libraries/select2-bootstrap.css",
+                        "~/Content/themes/admin/libraries/validationEngine.jquery.css",
                         "~/Content/themes/admin/global/layout.css",
                         "~/Content/themes/admin/global/elements.css",
                         "~/Content/themes/admin/global/icons.css",

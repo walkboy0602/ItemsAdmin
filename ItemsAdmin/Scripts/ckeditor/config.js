@@ -13,7 +13,6 @@ CKEDITOR.editorConfig = function( config ) {
 	    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink', '-', 'About']
     ];
 
-    
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
 	config.toolbarGroups = [
@@ -32,9 +31,7 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'others' }		
 	];
 
-	config.uiColor = '#FAFAFA';
-
-	config.height = 10;
+	//config.uiColor = '#FAFAFA';
 
 	// Remove some buttons, provided by the standard plugins, which we don't
 	// need to have in the Standard(s) toolbar.

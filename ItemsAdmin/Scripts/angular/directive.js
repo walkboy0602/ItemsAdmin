@@ -80,7 +80,24 @@ shopApp.directive('ckEditor', [function () {
         restrict: 'CA',
         link: function (scope, elm, attr, ngModel) {
             var CKEDITOR_BASEPATH = '/scripts/ckeditor/';
-            var ck = CKEDITOR.replace(elm[0]);
+
+            var ck = CKEDITOR.replace(elm[0], {
+                toolbarGroups: [
+		            { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+		            { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi'] },
+		            { name: 'styles' },
+		            { name: 'colors' },
+		            '/',
+		            { name: 'clipboard', groups: ['clipboard', 'undo'] },
+		            { name: 'editing', groups: ['find', 'selection', 'spellchecker'] },
+		            { name: 'links' },
+		            { name: 'insert' },
+		            { name: 'forms' },
+		            { name: 'tools' },
+		            { name: 'document', groups: ['mode', 'document', 'doctools'] },
+		            { name: 'others' }  
+                ]
+            });
 
             if (!ngModel) return;
 
@@ -119,7 +136,7 @@ shopApp.directive('ckEditorMini', [function () {
                 toolbar: [
                     { name: 'paragraph', items: ['BulletedList', 'Outdent', 'Indent'] }
                 ],
-                height: 80
+                height: 100
                 //,uiColor: '#14B8C4'
             });
 

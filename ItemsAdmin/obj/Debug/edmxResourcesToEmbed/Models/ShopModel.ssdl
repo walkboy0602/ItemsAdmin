@@ -36,7 +36,7 @@ warning 6002: The table/view 'ShopDB.dbo.AccountType' does not have a primary ke
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CategoryID" Type="int" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Description" Type="text" Nullable="false" />
+    <Property Name="Description" Type="text" />
     <Property Name="Currency" Type="varchar" MaxLength="10" />
     <Property Name="Price" Type="decimal" Precision="9" Scale="2" />
     <Property Name="Status" Type="char" MaxLength="2" />
@@ -77,14 +77,28 @@ warning 6002: The table/view 'ShopDB.dbo.ListingImageDeleted' does not have a pr
     <Property Name="Src" Type="nvarchar" MaxLength="200" />
     <Property Name="isDeleted" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="ListingOption">
+    <Key>
+      <PropertyRef Name="ListingID" />
+      <PropertyRef Name="Sort" />
+    </Key>
+    <Property Name="ListingID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="OriginalPrice" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="DiscountedPrice" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="Quantity" Type="smallint" />
+    <Property Name="LinkToImage" Type="int" />
+    <Property Name="Sort" Type="smallint" Nullable="false" />
+  </EntityType>
   <EntityType Name="ListingSpec">
     <Key>
       <PropertyRef Name="ListingID" />
-      <PropertyRef Name="Attribute" />
+      <PropertyRef Name="Sort" />
     </Key>
     <Property Name="ListingID" Type="int" Nullable="false" />
     <Property Name="Attribute" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Text" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Sort" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="RefCategory">
     <Key>
@@ -210,9 +224,22 @@ warning 6002: The table/view 'ShopDB.dbo.User' does not have a primary key defin
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ListingOption_ListingID_FK">
+    <End Role="Listing" Type="Self.Listing" Multiplicity="1" />
+    <End Role="ListingOption" Type="Self.ListingOption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listing">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListingOption">
+        <PropertyRef Name="ListingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ShopDBModelStoreContainer">
     <EntitySet Name="Listing" EntityType="Self.Listing" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListingImage" EntityType="Self.ListingImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListingOption" EntityType="Self.ListingOption" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListingSpec" EntityType="Self.ListingSpec" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RefCategory" EntityType="Self.RefCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Account" EntityType="Self.Account" store:Type="Tables" store:Schema="dbo">
@@ -303,6 +330,10 @@ FROM [dbo].[User] AS [User]</DefiningQuery>
     <AssociationSet Name="FK_RefCategory_CategoryID" Association="Self.FK_RefCategory_CategoryID">
       <End Role="RefCategory" EntitySet="RefCategory" />
       <End Role="Listing" EntitySet="Listing" />
+    </AssociationSet>
+    <AssociationSet Name="ListingOption_ListingID_FK" Association="Self.ListingOption_ListingID_FK">
+      <End Role="Listing" EntitySet="Listing" />
+      <End Role="ListingOption" EntitySet="ListingOption" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

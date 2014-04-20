@@ -37,5 +37,6 @@ namespace MonsterAdmin.Models
         public DbSet<Listing> Listings { get; set; }
         public DbSet<ListingImage> ListingImages { get; set; }
         public DbSet<ListingSpec> ListingSpecs { get; set; }
+        public DbSet<ListingOption> ListingOptions { get; set; }
     }
 }

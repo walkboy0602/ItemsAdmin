@@ -1,0 +1,15 @@
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\MonsterAdmin.dll.config
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\MonsterAdmin.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\MonsterAdmin.pdb
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\DropDownList_Optgroup.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\EntityFramework.SqlServer.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\Framework.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\Microsoft.Web.Mvc.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\Newtonsoft.Json.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\AWSSDK.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\Framework.pdb
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\EntityFramework.SqlServer.xml
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\bin\Newtonsoft.Json.xml
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\obj\Debug\ItemsAdmin.csprojResolveAssemblyReference.cache
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\obj\Debug\MonsterAdmin.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\ItemsAdmin\obj\Debug\MonsterAdmin.pdb

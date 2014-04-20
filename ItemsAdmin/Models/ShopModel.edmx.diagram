@@ -20,6 +20,8 @@
         <AssociationConnector Association="ShopDBModel.FK_Listing_ListingID" />
         <EntityTypeShape EntityType="ShopDBModel.ListingSpec" Width="1.5" PointX="5.25" PointY="14.5" />
         <AssociationConnector Association="ShopDBModel.FK__ListingSp__Listi__2F10007B" />
+        <EntityTypeShape EntityType="ShopDBModel.ListingOption" Width="1.5" PointX="1.25" PointY="14.375" />
+        <AssociationConnector Association="ShopDBModel.ListingOption_ListingID_FK" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
