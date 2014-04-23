@@ -36,8 +36,7 @@ namespace MonsterAdmin.Controllers
         [HttpPost]
         public JsonResult ValidateEmail(RegisterUser user)
         {
-            user.Email = "test123@test.com";
-            user.Password = "test123";
+
          
             WebSecurity.CreateUserAndAccount(user.Email, user.Password, propertyValues: new { 
                             Password = user.Password,

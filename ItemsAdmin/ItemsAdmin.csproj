@@ -822,7 +822,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MonsterItem\Framework\Framework.csproj">
+    <ProjectReference Include="..\Framework\Framework.csproj">
       <Project>{d46d95d5-3cdf-4edb-9790-57e66c2f855e}</Project>
       <Name>Framework</Name>
     </ProjectReference>
