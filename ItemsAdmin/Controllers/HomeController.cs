@@ -28,5 +28,11 @@ namespace MonsterAdmin.Controllers
 
             return View();
         }
+
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+
     }
 }

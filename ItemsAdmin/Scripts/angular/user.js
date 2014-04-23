@@ -1,5 +1,5 @@
 ﻿//Login User
-shopApp.controller("LoginController", ['$scope', 'userFactory', '$route',
+shopApp.controller("LoginController", ['$scope', 'UserFactory', '$route',
     function ($scope, userFactory, $route) {
 
         $scope.form = {
@@ -33,6 +33,44 @@ shopApp.controller("LoginController", ['$scope', 'userFactory', '$route',
         }
 
     }]);
+
+//Register Account v2
+function SignUpCtrl($scope, UserFactory)
+{
+
+    $scope.form = {};
+
+    $scope.tab1 = function () {
+
+        $('a[href="#tab1"]').tab('show');
+    }
+
+    $scope.tab2 = function () {
+        validate.validationEngine('validate');
+
+        if (!isValid) return;
+        console.log($scope.form);
+        UserFactory.validateEmail($scope.form)
+            .success(function (data) {
+                console.log('success');
+            })
+        .error(function (data, status) {
+            console.log('error');
+        });
+
+        //$('a[href="#tab2"]').tab('show');
+    }
+
+    //SignUp Tab1 validation
+    var isValid = false;
+    var validate = jQuery("#signupform1").validationEngine({
+        //promptPosition: "bottomRight",
+        prettySelect: true,
+        onValidationComplete: function (form, status) {
+            isValid = status;
+        }
+    });
+}
 
 //Register Account
 shopApp.controller("RegisterController", ['$scope', 'userFactory',

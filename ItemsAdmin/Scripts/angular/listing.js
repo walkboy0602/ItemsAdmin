@@ -118,8 +118,8 @@ function ListingImageCtrl($scope, $q, ListingFactory, $filter, uploadManager) {
     }
 
     //Edit POST
-    $scope.changeDesc = function () {
-        ListingFactory.changeDesc($scope.file)
+    $scope.editImage = function () {
+        ListingFactory.editImage($scope.file)
             .success(function (data, status) {
                 $('#editModal').modal('hide');
             })
@@ -461,8 +461,11 @@ function ListingOptionCtrl($scope, $q, ListingFactory, $filter) {
         console.log('d');
         ListingFactory.deleteOption($scope.form)
              .success(function (data, status) {
-                 console.log('success');
-
+                 angular.forEach($scope.fields, function (val, key) {
+                     if (val.Sort === data.Sort) {
+                         $scope.fields.splice(key, 1);
+                     }
+                 });
                  $('#deleteModal').modal('hide');
              })
             .error(function (data, status) {

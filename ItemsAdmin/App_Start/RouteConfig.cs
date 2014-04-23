@@ -19,11 +19,19 @@ namespace MonsterAdmin
             //    defaults: new { controller = "Listing", action = "Index", id = UrlParameter.Optional }
             //);
 
+            //-- signup Route
             routes.MapRoute(
-                name: "Default",
+                name: "SignUp",
+                url: "SignUp",
+                defaults: new { controller = "Home", action = "SignUp" }
+            );
+
+            routes.MapRoute(
+                name: "routeWithController",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
 
 
 

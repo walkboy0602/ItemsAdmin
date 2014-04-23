@@ -25,11 +25,11 @@ namespace MonsterAdmin.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<ShopDBEntities>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new ShopDBEntities())
                     {
                         if (!context.Database.Exists())
                         {
@@ -38,7 +38,7 @@ namespace MonsterAdmin.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("shopDB","UserSimple", "UserID", "Email", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

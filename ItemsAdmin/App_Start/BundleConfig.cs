@@ -24,7 +24,7 @@ namespace MonsterAdmin
 
             bundles.Add(new ScriptBundle("~/bundles/form").Include(
                 "~/Scripts/common/jquery.uniform.js"
-             )); 
+             ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery/jquery-ui-{version}.js"));
@@ -96,7 +96,8 @@ namespace MonsterAdmin
                         "~/Content/themes/admin/module/form-showcase.css",
                         "~/Content/themes/admin/module/gallery.css",
                         "~/Content/fileupload/jquery.fileupload-ui.css",
-                        "~/Content/fileupload/jquery.fileupload.css"
+                        "~/Content/fileupload/jquery.fileupload.css",
+                        "~/Content/themes/admin/module/signup.css"
                         ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="ShopDBModel.RefValue" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopDBModel.Region" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopDBModel.RegionZone" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopDBModel.User" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopDBModel.RefCategory" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="ShopDBModel.Listing" Width="1.5" PointX="3" PointY="9.5" />
         <AssociationConnector Association="ShopDBModel.FK_RefCategory_CategoryID" />
@@ -22,6 +21,11 @@
         <AssociationConnector Association="ShopDBModel.FK__ListingSp__Listi__2F10007B" />
         <EntityTypeShape EntityType="ShopDBModel.ListingOption" Width="1.5" PointX="1.25" PointY="14.375" />
         <AssociationConnector Association="ShopDBModel.ListingOption_ListingID_FK" />
+        <EntityTypeShape EntityType="ShopDBModel.User" Width="1.5" PointX="9.625" PointY="8.125" />
+        <EntityTypeShape EntityType="ShopDBModel.webpages_Membership" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ShopDBModel.webpages_OAuthMembership" Width="1.5" PointX="11.375" PointY="4.75" />
+        <EntityTypeShape EntityType="ShopDBModel.webpages_Roles" Width="1.5" PointX="12.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ShopDBModel.UserSimple" Width="1.5" PointX="3.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

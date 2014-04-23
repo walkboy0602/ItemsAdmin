@@ -13,7 +13,7 @@ using System.Net;
 using Newtonsoft.Json;
 using Framework;
 
-namespace MonsterAdmin.Controllers.merchant
+namespace MonsterAdmin.Controllers
 {
     public class ListingController : Controller
     {
@@ -445,7 +445,7 @@ namespace MonsterAdmin.Controllers.merchant
                 db.SaveChanges();
             }
 
-            return Json(true);
+            return Json(listingOption);
         }
 
         #endregion

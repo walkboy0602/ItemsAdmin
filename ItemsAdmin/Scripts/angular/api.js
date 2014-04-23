@@ -2,7 +2,7 @@
 //http://weblogs.asp.net/dwahlin/archive/2013/08/16/using-an-angularjs-factory-to-interact-with-a-restful-service.aspx
 
 angular.module('shopAPI', [])
-    .factory('userFactory', ['$http', function ($http) {
+    .factory('UserFactory', ['$http', function ($http) {
         return {
             register: function (data) {
                 return $http.post('/api/user/register', data);
@@ -12,6 +12,9 @@ angular.module('shopAPI', [])
             },
             logout: function (data) {
                 return $http.post('/api/user/logout', data);
+            },
+            validateEmail: function (data) {
+                return $http.post('/user/validateEmail', data);
             }
         }
     }])
@@ -30,8 +33,8 @@ angular.module('shopAPI', [])
             getImage: function (id) {
                 return $http.get('/listing/getImage', { params: { id: id } });
             },
-            changeDesc: function (data) {
-                return $http.post('/listing/changeDesc', data);
+            editImage: function (data) {
+                return $http.post('/listing/editImage', data);
             },
             deleteImage: function (data) {
                 return $http.post('/listing/deleteImage', data);
@@ -48,34 +51,20 @@ angular.module('shopAPI', [])
             getDescription: function (id) {
                 return $http.get('/listing/getDescription', { params: { ListingID: id } });
             },
-            saveOption: function(data)
-            {
+            saveOption: function (data) {
                 return $http.post('/listing/saveOption', data);
             },
-            getOption: function (id)
-            {
+            getOption: function (id) {
                 return $http.get('/listing/getOption', { params: { ListingID: id } });
             },
-            editOption: function(data)
-            {
+            editOption: function (data) {
                 return $http.post('/listing/editOption', data);
             },
-            deleteOption: function(data)
-            {
+            deleteOption: function (data) {
                 return $http.post('/listing/deleteOption', data);
             }
         }
 
-
-    }])
-    .factory('ImageFactory', ['$http', function ($http) {
-
-        return {
-            delete: function (data) {
-                //console.log(JSON.stringify(data));
-                return $http.post('/api/image/delete', data);
-            }
-        }
 
     }]);
 
