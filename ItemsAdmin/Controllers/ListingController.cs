@@ -7,11 +7,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Helpers;
-using MonsterAdmin.Models;
-using MonsterAdmin.ViewModel;
 using System.Net;
 using Newtonsoft.Json;
 using Framework;
+using App.Core.Data;
+using App.Core.ViewModel;
 
 namespace MonsterAdmin.Controllers
 {
@@ -26,9 +26,11 @@ namespace MonsterAdmin.Controllers
 
         public ActionResult Index()
         {
-            var listings = db.Listings.Include(l => l.RefCategory);
+            //var listings = db.Listings.Include(l => l.RefCategory);
 
-            return View(listings.ToList());
+            //return View(listings.ToList());
+
+            return View();
         }
 
         // GET: /Listing/Create

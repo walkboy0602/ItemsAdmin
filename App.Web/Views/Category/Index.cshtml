@@ -1,0 +1,328 @@
+﻿@model IEnumerable<App.Core.Data.RefCategory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="header-row">
+    <div class="header-main">
+        <i class="fa fa-tags"></i>
+        <span class="breadcrumb">
+            Category / @ViewBag.ParentName
+        </span>
+    </div>
+</div>
+
+<!-- products table-->
+<!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
+<div class="table-wrapper products-table section">
+    <div class="row filter-block">
+        <div class="pull-right">
+            <div class="ui-select">
+                <select>
+                    <option>Filter users</option>
+                    <option>Signed last 30 days</option>
+                    <option>Active users</option>
+                </select>
+            </div>
+            <input type="text" class="search">
+            <a href="/category/create" class="btn-flat success new-product">+ Add category</a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-5">
+                        <input type="checkbox">
+                        Category Name
+                    </th>
+                    <th class="col-md-4">
+                        <span class="line"></span>Description
+                    </th>
+                    <th class="col-md-1">
+                        <span class="line"></span>Status
+                    </th>
+                    <th class="col-md-1">
+                        <span class="line"></span>#Items
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- row -->
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox">
+                            @*<span class="name">@Html.DisplayFor(m => c.Name)</span>*@
+                            @Html.ActionLink(c.Name, "index", new { parentid = c.id }, new { @class = "name" })
+                        </td>
+                        <td class="description">
+                            @Html.DisplayFor(m => c.Description)
+                        </td>
+                        <td>
+                            @if (c.isActive == true)
+                            {
+                                <span class="label label-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="label label-danger">Inactive</span>
+                            }
+
+                        </td>
+                        <td class="description">
+                            13
+                            <ul class="actions">
+                                <li>
+                                    @Html.ActionLink("Edit", "Edit", new { id = c.id })
+                                </li>
+                                <li class="last">
+                                    @Html.ActionLink("Delete", "Delete", new { id = c.id })
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!-- end products table -->
+<!-- orders table -->
+<div class="table-wrapper orders-table section">
+    <div class="row head">
+        <div class="col-md-12">
+            <h4>Orders</h4>
+        </div>
+    </div>
+    <div class="row filter-block">
+        <div class="pull-right">
+            <div class="btn-group pull-right">
+                <button class="glow left large">All</button>
+                <button class="glow middle large">Pending</button>
+                <button class="glow right large">Completed</button>
+            </div>
+            <input type="text" class="search order-search" placeholder="Search for an order..">
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-2">
+                        Order ID
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>
+                        Date
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>
+                        Name
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>
+                        Status
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>
+                        Items
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>
+                        Total amount
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- row -->
+                <tr class="first">
+                    <td>
+                        <a href="http://detail.herokuapp.com/tables.html#">#459</a>
+                    </td>
+                    <td>
+                        Jan 03, 2013
+                    </td>
+                    <td>
+                        <a href="http://detail.herokuapp.com/tables.html#">John Smith</a>
+                    </td>
+                    <td>
+                        <span class="label label-success">Completed</span>
+                    </td>
+                    <td>
+                        3
+                    </td>
+                    <td>
+                        $ 3,500.00
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://detail.herokuapp.com/tables.html#">#510</a>
+                    </td>
+                    <td>
+                        Feb 22, 2013
+                    </td>
+                    <td>
+                        <a href="http://detail.herokuapp.com/tables.html#">Anna Richards</a>
+                    </td>
+                    <td>
+                        <span class="label label-info">Pending</span>
+                    </td>
+                    <td>
+                        5
+                    </td>
+                    <td>
+                        $ 800.00
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://detail.herokuapp.com/tables.html#">#590</a>
+                    </td>
+                    <td>
+                        Mar 03, 2013
+                    </td>
+                    <td>
+                        <a href="http://detail.herokuapp.com/tables.html#">Steven McFly</a>
+                    </td>
+                    <td>
+                        <span class="label label-success">Completed</span>
+                    </td>
+                    <td>
+                        2
+                    </td>
+                    <td>
+                        $ 1,350.00
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="http://detail.herokuapp.com/tables.html#">#618</a>
+                    </td>
+                    <td>
+                        Jan 03, 2013
+                    </td>
+                    <td>
+                        <a href="http://detail.herokuapp.com/tables.html#">George Williams</a>
+                    </td>
+                    <td>
+                        <span class="label">Canceled</span>
+                    </td>
+                    <td>
+                        8
+                    </td>
+                    <td>
+                        $ 3,499.99
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- end orders table -->
+<!-- users table -->
+<div class="table-wrapper users-table section">
+    <div class="row head">
+        <div class="col-md-12">
+            <h4>Users</h4>
+        </div>
+    </div>
+    <div class="row filter-block">
+        <div class="pull-right">
+            <a class="btn-flat pull-right success new-product add-user">+ Add user</a>
+            <input type="text" class="search user-search" placeholder="Search for users..">
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-4">
+                        Name
+                    </th>
+                    <th class="col-md-3">
+                        <span class="line"></span>Signed up
+                    </th>
+                    <th class="col-md-2">
+                        <span class="line"></span>Total spent
+                    </th>
+                    <th class="col-md-3 align-right">
+                        <span class="line"></span>Email
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- row -->
+                <tr class="first">
+                    <td>
+                        <img src="./Detail Admin - Tables showcase_files/contact-img.png" alt="avatar" class="img-circle avatar hidden-phone">
+                        <a href="http://detail.herokuapp.com/user-profile.html" class="name">Alejandra Galvan Castillo</a>
+                        <span class="subtext">Graphic Design</span>
+                    </td>
+                    <td>
+                        Jan 11, 2012
+                    </td>
+                    <td>
+                        $ 500.00
+                    </td>
+                    <td class="align-right">
+                        <a href="http://detail.herokuapp.com/tables.html#">alejandra@gmail.com</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="./Detail Admin - Tables showcase_files/contact-img2.png" alt="avatar" class="img-circle avatar hidden-phone">
+                        <a href="http://detail.herokuapp.com/user-profile.html" class="name">Alejandra Galvan Castillo</a>
+                        <span class="subtext">Graphic Design</span>
+                    </td>
+                    <td>
+                        Apr 23, 2012
+                    </td>
+                    <td>
+                        $ 3,210.00
+                    </td>
+                    <td class="align-right">
+                        <a href="http://detail.herokuapp.com/tables.html#">alejandra@gmail.com</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="./Detail Admin - Tables showcase_files/contact-img.png" alt="avatar" class="img-circle avatar hidden-phone">
+                        <a href="http://detail.herokuapp.com/user-profile.html" class="name">Alejandra Galvan Castillo</a>
+                        <span class="subtext">Graphic Design</span>
+                    </td>
+                    <td>
+                        Feb 03, 2013
+                    </td>
+                    <td>
+                        $ 890.00
+                    </td>
+                    <td class="align-right">
+                        <a href="http://detail.herokuapp.com/tables.html#">alejandra@gmail.com</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="./Detail Admin - Tables showcase_files/contact-img2.png" alt="avatar" class="img-circle avatar hidden-phone">
+                        <a href="http://detail.herokuapp.com/user-profile.html" class="name">Alejandra Galvan Castillo</a>
+                        <span class="subtext">Graphic Design</span>
+                    </td>
+                    <td>
+                        Sep 19, 2012
+                    </td>
+                    <td>
+                        $ 899.99
+                    </td>
+                    <td class="align-right">
+                        <a href="http://detail.herokuapp.com/tables.html#">alejandra@gmail.com</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- end users table -->

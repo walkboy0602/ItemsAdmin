@@ -1,0 +1,35 @@
+﻿@model App.Core.Data.RefCategory
+
+@{
+    ViewBag.Title = "Create";
+}
+@{
+    ViewBag.Title = "Create Category";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="header-row">
+        <div class="header-main">
+            <i class="fa fa-tags"></i>
+            <span class="breadcrumb">
+                <a href="/category">Category</a>
+            </span>
+            /
+            <span class="breadcrumb">Add Category</span>
+        </div>
+        <div class="header-right">
+            <a class="btn" href="/category">Cancel</a>
+            <button type="submit" class="btn-glow success btn-finish">
+                Save
+            </button>
+        </div>
+    </div>
+
+    @RenderPage("_form.cshtml")
+
+}
+
+@Scripts.Render("~/bundles/form")

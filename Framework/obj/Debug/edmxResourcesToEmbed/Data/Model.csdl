@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Listing">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Currency" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="Status" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="Int32" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="IsNegotiable" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ListingSpecs" Relationship="Self.FK__ListingSp__Listi__2F10007B" FromRole="Listing" ToRole="ListingSpec" />
+    <NavigationProperty Name="ListingImages" Relationship="Self.FK_Listing_ListingID" FromRole="Listing" ToRole="ListingImage" />
+    <NavigationProperty Name="RefCategory" Relationship="Self.FK_RefCategory_CategoryID" FromRole="Listing" ToRole="RefCategory" />
+    <NavigationProperty Name="ListingOptions" Relationship="Self.ListingOption_ListingID_FK" FromRole="Listing" ToRole="ListingOption" />
+  </EntityType>
+  <EntityType Name="ListingImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ListingID" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="IsCover" Type="Boolean" Nullable="false" />
+    <Property Name="Sort" Type="Byte" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Src" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Listing" Relationship="Self.FK_Listing_ListingID" FromRole="ListingImage" ToRole="Listing" />
+  </EntityType>
+  <EntityType Name="ListingOption">
+    <Key>
+      <PropertyRef Name="ListingID" />
+      <PropertyRef Name="Sort" />
+    </Key>
+    <Property Name="ListingID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OriginalPrice" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="DiscountedPrice" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="Quantity" Type="Int16" />
+    <Property Name="LinkToImage" Type="Int32" />
+    <Property Name="Sort" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Listing" Relationship="Self.ListingOption_ListingID_FK" FromRole="ListingOption" ToRole="Listing" />
+  </EntityType>
+  <EntityType Name="ListingSpec">
+    <Key>
+      <PropertyRef Name="ListingID" />
+      <PropertyRef Name="Sort" />
+    </Key>
+    <Property Name="ListingID" Type="Int32" Nullable="false" />
+    <Property Name="Attribute" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Sort" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Listing" Relationship="Self.FK__ListingSp__Listi__2F10007B" FromRole="ListingSpec" ToRole="Listing" />
+  </EntityType>
+  <EntityType Name="RefCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="MetaDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MetaKeyword" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Sort" Type="Int32" />
+    <Property Name="isActive" Type="Boolean" />
+    <NavigationProperty Name="Listings" Relationship="Self.FK_RefCategory_CategoryID" FromRole="RefCategory" ToRole="Listing" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HashPassword" Type="Binary" MaxLength="50" FixedLength="false" Nullable="false" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Identification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdentificationFile" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PasswordQuestion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordAnswer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+    <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LoginCounter" Type="Int32" Nullable="false" />
+    <Property Name="LastIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+    <Property Name="LastPasswordChangedDate" Type="DateTime" Precision="3" />
+    <Property Name="LastLockoutDate" Type="DateTime" Precision="3" />
+    <Property Name="FailedPasswordAttemptCount" Type="Int32" />
+    <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserSimple">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="USERGUID" Type="Guid" />
+  </EntityType>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsConfirmed" Type="Boolean" />
+    <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="webpages_OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="LastIP" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="LoginCounter" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="Binary" MaxLength="50" FixedLength="false" Nullable="false" />
+    <Property Name="LastIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LoginCounter" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AccountType">
+    <Key>
+      <PropertyRef Name="AccountID" />
+      <PropertyRef Name="Type" />
+    </Key>
+    <Property Name="AccountID" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="Byte" Nullable="false" />
+    <Property Name="ExpireDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ListingImageDeleted">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="ListingID" />
+      <PropertyRef Name="IsCover" />
+      <PropertyRef Name="isDeleted" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ListingID" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="IsCover" Type="Boolean" Nullable="false" />
+    <Property Name="Sort" Type="Byte" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Src" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RefType">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Description" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RefValue">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="TypeID" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ValueCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TypeID" Type="Byte" Nullable="false" />
+    <Property Name="Order" Type="Byte" />
+    <Property Name="CssClass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="CountryCode" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Level" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Level" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RegionZone">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="RegionID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RegionID" Type="Int32" Nullable="false" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="longitude" Type="Decimal" Precision="9" Scale="6" />
+    <Property Name="latitude" Type="Decimal" Precision="9" Scale="6" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sort" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__ListingSp__Listi__2F10007B">
+    <End Role="Listing" Type="Self.Listing" Multiplicity="1" />
+    <End Role="ListingSpec" Type="Self.ListingSpec" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listing">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListingSpec">
+        <PropertyRef Name="ListingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Listing_ListingID">
+    <End Role="Listing" Type="Self.Listing" Multiplicity="1" />
+    <End Role="ListingImage" Type="Self.ListingImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listing">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListingImage">
+        <PropertyRef Name="ListingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RefCategory_CategoryID">
+    <End Role="RefCategory" Type="Self.RefCategory" Multiplicity="1" />
+    <End Role="Listing" Type="Self.Listing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RefCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Listing">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ListingOption_ListingID_FK">
+    <End Role="Listing" Type="Self.Listing" Multiplicity="1" />
+    <End Role="ListingOption" Type="Self.ListingOption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listing">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListingOption">
+        <PropertyRef Name="ListingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShopDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Listings" EntityType="Self.Listing" />
+    <EntitySet Name="ListingImages" EntityType="Self.ListingImage" />
+    <EntitySet Name="ListingOptions" EntityType="Self.ListingOption" />
+    <EntitySet Name="ListingSpecs" EntityType="Self.ListingSpec" />
+    <EntitySet Name="RefCategories" EntityType="Self.RefCategory" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserSimples" EntityType="Self.UserSimple" />
+    <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
+    <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" />
+    <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
+    <EntitySet Name="ListingImageDeleteds" EntityType="Self.ListingImageDeleted" />
+    <EntitySet Name="RefTypes" EntityType="Self.RefType" />
+    <EntitySet Name="RefValues" EntityType="Self.RefValue" />
+    <EntitySet Name="Regions" EntityType="Self.Region" />
+    <EntitySet Name="RegionZones" EntityType="Self.RegionZone" />
+    <AssociationSet Name="FK__ListingSp__Listi__2F10007B" Association="Self.FK__ListingSp__Listi__2F10007B">
+      <End Role="Listing" EntitySet="Listings" />
+      <End Role="ListingSpec" EntitySet="ListingSpecs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Listing_ListingID" Association="Self.FK_Listing_ListingID">
+      <End Role="Listing" EntitySet="Listings" />
+      <End Role="ListingImage" EntitySet="ListingImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RefCategory_CategoryID" Association="Self.FK_RefCategory_CategoryID">
+      <End Role="RefCategory" EntitySet="RefCategories" />
+      <End Role="Listing" EntitySet="Listings" />
+    </AssociationSet>
+    <AssociationSet Name="ListingOption_ListingID_FK" Association="Self.ListingOption_ListingID_FK">
+      <End Role="Listing" EntitySet="Listings" />
+      <End Role="ListingOption" EntitySet="ListingOptions" />
+    </AssociationSet>
+    <FunctionImport Name="sp_register_user">
+      <Parameter Name="id" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="firstname" Mode="In" Type="String" />
+      <Parameter Name="lastname" Mode="In" Type="String" />
+      <Parameter Name="mobile" Mode="In" Type="String" />
+      <Parameter Name="ip" Mode="In" Type="String" />
+      <Parameter Name="type" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

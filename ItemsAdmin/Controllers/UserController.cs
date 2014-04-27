@@ -6,12 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Net;
-using MonsterAdmin.Models;
-using MonsterAdmin.ViewModel;
 using MonsterAdmin.Filters;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-
+using App.Core.Data;
 
 namespace MonsterAdmin.Controllers
 {
@@ -28,19 +26,18 @@ namespace MonsterAdmin.Controllers
             return View();
         }
 
-        public ActionResult SignUp()
+        public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public JsonResult ValidateEmail(RegisterUser user)
+        public JsonResult ValidateEmail()
         {
 
-         
-            WebSecurity.CreateUserAndAccount(user.Email, user.Password, propertyValues: new { 
-                            Password = user.Password,
-                            UserID = user.UserId });
+            //WebSecurity.CreateUserAndAccount(user.Email, user.Password, propertyValues: new { 
+            //                Password = user.Password,
+            //                UserID = user.UserId });
             return Json(true);
 
         }

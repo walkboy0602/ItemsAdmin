@@ -31,3 +31,10 @@ C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\Framework\obj\Debug\Framework.
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\Framework\obj\Debug\Framework.csproj.GenerateResource.Cache
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\Framework\obj\Debug\Framework.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\Framework\obj\Debug\Framework.pdb
+C:\Users\chenhau\Documents\Itemsss.com\ItemsAdmin\Framework\bin\Debug\Framework.dll
+C:\Users\chenhau\Documents\Itemsss.com\ItemsAdmin\Framework\bin\Debug\Framework.pdb
+C:\Users\chenhau\Documents\Itemsss.com\ItemsAdmin\Framework\obj\Debug\Framework.Properties.Resources.resources
+C:\Users\chenhau\Documents\Itemsss.com\ItemsAdmin\Framework\obj\Debug\Framework.csproj.GenerateResource.Cache
+C:\Users\chenhau\Documents\Itemsss.com\ItemsAdmin\Framework\obj\Debug\Framework.dll
+C:\Users\chenhau\Documents\Itemsss.com\ItemsAdmin\Framework\obj\Debug\Framework.pdb
+C:\Users\chenhau\Documents\Itemsss.com\ItemsAdmin\Framework\obj\Debug\Framework.csprojResolveAssemblyReference.cache

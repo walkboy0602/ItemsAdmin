@@ -1,0 +1,36 @@
+﻿@model App.Core.Data.RefCategory
+
+@{
+    ViewBag.Title = "Edit";
+}
+@{
+    ViewBag.Title = "Edit Category";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="header-row">
+        <div class="header-main">
+            <i class="fa fa-tags"></i>
+            <span class="breadcrumb">
+                <a href="/merchant/listing">Category</a>
+            </span>
+            /
+            <span>Edit Category - @Model.Name</span>
+        </div>
+        <div class="header-right">
+            <a data-removeif="product.gift_card" data-route="Product" class="btn" href="/admin/products">Cancel</a>
+            <!--batman-insertif="product.gift_card"-->
+            <input type="submit" class="btn btn-primary" data-addclass-btn-disabled="maxSKUReached" value="Save">
+        </div>
+    </div>
+
+    @RenderPage("_form.cshtml")
+
+}
+
+
+@Scripts.Render("~/bundles/form")

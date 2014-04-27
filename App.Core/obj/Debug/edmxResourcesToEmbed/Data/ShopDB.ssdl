@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ShopDB.dbo.Account' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="LastIP" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="LoginCounter" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varbinary" MaxLength="50" Nullable="false" />
+    <Property Name="LastIP" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="LoginCounter" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ShopDB.dbo.AccountType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AccountType">
+    <Key>
+      <PropertyRef Name="AccountID" />
+      <PropertyRef Name="Type" />
+    </Key>
+    <Property Name="AccountID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="tinyint" Nullable="false" />
+    <Property Name="ExpireDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Listing">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="text" />
+    <Property Name="Currency" Type="varchar" MaxLength="10" />
+    <Property Name="Price" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="Status" Type="char" MaxLength="2" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateBy" Type="int" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="IsNegotiable" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ListingImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ListingID" Type="int" Nullable="false" />
+    <Property Name="FileName" Type="varchar" MaxLength="1000" />
+    <Property Name="IsCover" Type="bit" Nullable="false" />
+    <Property Name="Sort" Type="tinyint" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Src" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ShopDB.dbo.ListingImageDeleted' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ListingImageDeleted">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="ListingID" />
+      <PropertyRef Name="IsCover" />
+      <PropertyRef Name="isDeleted" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ListingID" Type="int" Nullable="false" />
+    <Property Name="FileName" Type="varchar" MaxLength="1000" />
+    <Property Name="IsCover" Type="bit" Nullable="false" />
+    <Property Name="Sort" Type="tinyint" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Src" Type="nvarchar" MaxLength="200" />
+    <Property Name="isDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ListingOption">
+    <Key>
+      <PropertyRef Name="ListingID" />
+      <PropertyRef Name="Sort" />
+    </Key>
+    <Property Name="ListingID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="OriginalPrice" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="DiscountedPrice" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="Quantity" Type="smallint" />
+    <Property Name="LinkToImage" Type="int" />
+    <Property Name="Sort" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ListingSpec">
+    <Key>
+      <PropertyRef Name="ListingID" />
+      <PropertyRef Name="Sort" />
+    </Key>
+    <Property Name="ListingID" Type="int" Nullable="false" />
+    <Property Name="Attribute" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Text" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Sort" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RefCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ParentID" Type="int" />
+    <Property Name="MetaDescription" Type="nvarchar" MaxLength="200" />
+    <Property Name="MetaKeyword" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Sort" Type="int" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ShopDB.dbo.RefType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RefType">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Description" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentID" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ShopDB.dbo.RefValue' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RefValue">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="TypeID" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ValueCode" Type="char" MaxLength="3" />
+    <Property Name="ParentID" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="TypeID" Type="tinyint" Nullable="false" />
+    <Property Name="Order" Type="tinyint" />
+    <Property Name="CssClass" Type="varchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ShopDB.dbo.Region' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="CountryCode" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Level" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryCode" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Level" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RegionZone">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="RegionID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegionID" Type="int" Nullable="false" />
+    <Property Name="ParentID" Type="int" />
+    <Property Name="longitude" Type="decimal" Precision="9" Scale="6" />
+    <Property Name="latitude" Type="decimal" Precision="9" Scale="6" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="sort" Type="int" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="HashPassword" Type="varbinary" MaxLength="50" Nullable="false" />
+    <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Identification" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IdentificationFile" Type="varchar" MaxLength="100" />
+    <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+    <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="LoginCounter" Type="int" Nullable="false" />
+    <Property Name="LastIP" Type="varchar" MaxLength="50" />
+    <Property Name="LastLoginDate" Type="datetime" />
+    <Property Name="LastPasswordChangedDate" Type="datetime" />
+    <Property Name="LastLockoutDate" Type="datetime" />
+    <Property Name="FailedPasswordAttemptCount" Type="int" />
+    <Property Name="FailedPasswordAnswerAttemptCount" Type="int" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="UserSimple">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="USERGUID" Type="uniqueidentifier" />
+  </EntityType>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsConfirmed" Type="bit" />
+    <Property Name="LastPasswordFailureDate" Type="datetime" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PasswordChangedDate" Type="datetime" />
+    <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="webpages_OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__ListingSp__Listi__2F10007B">
+    <End Role="Listing" Type="Self.Listing" Multiplicity="1" />
+    <End Role="ListingSpec" Type="Self.ListingSpec" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listing">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListingSpec">
+        <PropertyRef Name="ListingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Listing_ListingID">
+    <End Role="Listing" Type="Self.Listing" Multiplicity="1" />
+    <End Role="ListingImage" Type="Self.ListingImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listing">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListingImage">
+        <PropertyRef Name="ListingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RefCategory_CategoryID">
+    <End Role="RefCategory" Type="Self.RefCategory" Multiplicity="1" />
+    <End Role="Listing" Type="Self.Listing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RefCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Listing">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ListingOption_ListingID_FK">
+    <End Role="Listing" Type="Self.Listing" Multiplicity="1" />
+    <End Role="ListingOption" Type="Self.ListingOption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Listing">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ListingOption">
+        <PropertyRef Name="ListingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShopDBModelStoreContainer">
+    <EntitySet Name="Listing" EntityType="Self.Listing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListingImage" EntityType="Self.ListingImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListingOption" EntityType="Self.ListingOption" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListingSpec" EntityType="Self.ListingSpec" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RefCategory" EntityType="Self.RefCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserSimple" EntityType="Self.UserSimple" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Account" EntityType="Self.Account" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Account].[ID] AS [ID], 
+    [Account].[UserName] AS [UserName], 
+    [Account].[Password] AS [Password], 
+    [Account].[LastIP] AS [LastIP], 
+    [Account].[CreateDate] AS [CreateDate], 
+    [Account].[LoginCounter] AS [LoginCounter]
+    FROM [dbo].[Account] AS [Account]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="AccountType" EntityType="Self.AccountType" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AccountType].[AccountID] AS [AccountID], 
+    [AccountType].[Type] AS [Type], 
+    [AccountType].[ExpireDate] AS [ExpireDate]
+    FROM [dbo].[AccountType] AS [AccountType]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ListingImageDeleted" EntityType="Self.ListingImageDeleted" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ListingImageDeleted].[id] AS [id], 
+    [ListingImageDeleted].[ListingID] AS [ListingID], 
+    [ListingImageDeleted].[FileName] AS [FileName], 
+    [ListingImageDeleted].[IsCover] AS [IsCover], 
+    [ListingImageDeleted].[Sort] AS [Sort], 
+    [ListingImageDeleted].[CreateDate] AS [CreateDate], 
+    [ListingImageDeleted].[Src] AS [Src], 
+    [ListingImageDeleted].[isDeleted] AS [isDeleted]
+    FROM [dbo].[ListingImageDeleted] AS [ListingImageDeleted]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RefType" EntityType="Self.RefType" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RefType].[ID] AS [ID], 
+    [RefType].[ParentID] AS [ParentID], 
+    [RefType].[Description] AS [Description]
+    FROM [dbo].[RefType] AS [RefType]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RefValue" EntityType="Self.RefValue" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RefValue].[ID] AS [ID], 
+    [RefValue].[ValueCode] AS [ValueCode], 
+    [RefValue].[ParentID] AS [ParentID], 
+    [RefValue].[Description] AS [Description], 
+    [RefValue].[TypeID] AS [TypeID], 
+    [RefValue].[Order] AS [Order], 
+    [RefValue].[CssClass] AS [CssClass], 
+    [RefValue].[IsActive] AS [IsActive]
+    FROM [dbo].[RefValue] AS [RefValue]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Region" EntityType="Self.Region" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Region].[ID] AS [ID], 
+    [Region].[CountryCode] AS [CountryCode], 
+    [Region].[Name] AS [Name], 
+    [Region].[Level] AS [Level]
+    FROM [dbo].[Region] AS [Region]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RegionZone" EntityType="Self.RegionZone" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RegionZone].[ID] AS [ID], 
+    [RegionZone].[RegionID] AS [RegionID], 
+    [RegionZone].[ParentID] AS [ParentID], 
+    [RegionZone].[longitude] AS [longitude], 
+    [RegionZone].[latitude] AS [latitude], 
+    [RegionZone].[name] AS [name], 
+    [RegionZone].[sort] AS [sort]
+    FROM [dbo].[RegionZone] AS [RegionZone]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__ListingSp__Listi__2F10007B" Association="Self.FK__ListingSp__Listi__2F10007B">
+      <End Role="Listing" EntitySet="Listing" />
+      <End Role="ListingSpec" EntitySet="ListingSpec" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Listing_ListingID" Association="Self.FK_Listing_ListingID">
+      <End Role="Listing" EntitySet="Listing" />
+      <End Role="ListingImage" EntitySet="ListingImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RefCategory_CategoryID" Association="Self.FK_RefCategory_CategoryID">
+      <End Role="RefCategory" EntitySet="RefCategory" />
+      <End Role="Listing" EntitySet="Listing" />
+    </AssociationSet>
+    <AssociationSet Name="ListingOption_ListingID_FK" Association="Self.ListingOption_ListingID_FK">
+      <End Role="Listing" EntitySet="Listing" />
+      <End Role="ListingOption" EntitySet="ListingOption" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
