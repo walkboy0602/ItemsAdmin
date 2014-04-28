@@ -25,7 +25,7 @@ namespace App.Web.Controllers
         // GET: /Category/
         public ActionResult Index(int? ParentID = null)
         {
-            var categories = _categoryService.GetCategoryByParent(ParentID);
+            var categories = _categoryService.GetByParentID(ParentID);
 
             if (ParentID != null)
             {

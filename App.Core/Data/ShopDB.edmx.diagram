@@ -26,6 +26,7 @@
         <AssociationConnector Association="ShopDBModel.FK_Listing_ListingID" ManuallyRouted="false" />
         <AssociationConnector Association="ShopDBModel.FK_RefCategory_CategoryID" ManuallyRouted="false" />
         <AssociationConnector Association="ShopDBModel.ListingOption_ListingID_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ShopDBModel.UserProfile" Width="1.5" PointX="5.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

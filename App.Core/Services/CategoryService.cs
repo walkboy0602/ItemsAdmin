@@ -17,7 +17,7 @@ namespace App.Core.Services
         void Create(RefCategory refCategory);
         void Save(RefCategory refCategory);
         RefCategory Find(int id);
-        IEnumerable<RefCategory> GetCategoryByParent(int? ParentID);
+        IEnumerable<RefCategory> GetByParentID(int? ParentID);
         string GetParentName(int? ParentID);
     }
 
@@ -46,7 +46,7 @@ namespace App.Core.Services
             db.SaveChanges();
         }
 
-        IEnumerable<RefCategory> ICategoryService.GetCategoryByParent(int? ParentID)
+        IEnumerable<RefCategory> ICategoryService.GetByParentID(int? ParentID)
         {
             return db.RefCategories.Where(x => x.ParentID == ParentID).ToList();
         }

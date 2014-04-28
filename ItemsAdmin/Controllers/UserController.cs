@@ -13,7 +13,7 @@ using App.Core.Data;
 
 namespace MonsterAdmin.Controllers
 {
-    [InitializeSimpleMembership]
+    //[InitializeSimpleMembership]
     public class UserController : Controller
     {
         private ShopDBEntities db = new ShopDBEntities();
@@ -32,12 +32,9 @@ namespace MonsterAdmin.Controllers
         }
 
         [HttpPost]
-        public JsonResult ValidateEmail()
+        public JsonResult ValidateEmail(RegisterModel model)
         {
-
-            //WebSecurity.CreateUserAndAccount(user.Email, user.Password, propertyValues: new { 
-            //                Password = user.Password,
-            //                UserID = user.UserId });
+            WebSecurity.CreateUserAndAccount(model.Email, model.Password);
             return Json(true);
 
         }

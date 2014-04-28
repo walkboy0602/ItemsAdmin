@@ -5,7 +5,7 @@ angular.module('shopAPI', [])
     .factory('UserFactory', ['$http', function ($http) {
         return {
             register: function (data) {
-                return $http.post('/api/user/register', data);
+                return $http.post('/Register', data);
             },
             login: function (data) {
                 return $http.post('/api/user/login', data);

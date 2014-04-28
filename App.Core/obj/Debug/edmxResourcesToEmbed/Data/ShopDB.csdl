@@ -313,5 +313,18 @@
       <End Role="Listing" EntitySet="Listings" />
       <End Role="ListingOption" EntitySet="ListingOptions" />
     </AssociationSet>
+    <EntitySet Name="UserProfiles" EntityType="ShopDBModel.UserProfile" />
   </EntityContainer>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Identification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IdentificationFile" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

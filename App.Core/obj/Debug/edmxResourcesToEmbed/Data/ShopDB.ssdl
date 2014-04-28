@@ -196,6 +196,18 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
     <Property Name="FailedPasswordAnswerAttemptCount" Type="int" />
     <Property Name="Comment" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Mobile" Type="varchar" MaxLength="50" />
+    <Property Name="Identification" Type="varchar" MaxLength="100" />
+    <Property Name="IdentificationFile" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="UserSimple">
     <Key>
       <PropertyRef Name="UserID" />
@@ -292,6 +304,7 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
     <EntitySet Name="ListingSpec" EntityType="Self.ListingSpec" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RefCategory" EntityType="Self.RefCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserSimple" EntityType="Self.UserSimple" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />

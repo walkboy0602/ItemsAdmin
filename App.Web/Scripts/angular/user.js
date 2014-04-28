@@ -50,7 +50,7 @@ function SignUpCtrl($scope, UserFactory)
 
         if (!isValid) return;
         console.log($scope.form);
-        UserFactory.validateEmail($scope.form)
+        UserFactory.register($scope.form)
             .success(function (data) {
                 console.log('success');
             })

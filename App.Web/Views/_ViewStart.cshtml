@@ -2,7 +2,7 @@
     var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
 
     string layout = "";
-    if (controller != "Home")
+    if (controller != "Home" && controller.ToLower() != "register")
     {
         layout = "~/Views/Shared/_AdminLayout.cshtml";
     }

@@ -3,6 +3,7 @@ using Microsoft.Practices.Unity;
 using Unity.Mvc3;
 using App.Web.Controllers;
 using App.Core.Services;
+using App.Web.Code.Unity;
 
 namespace App.Web
 {
@@ -23,10 +24,17 @@ namespace App.Web
             // it is NOT necessary to register your controllers
             
             // e.g. container.RegisterType<ITestService, TestService>();        
-            container.RegisterType<ICategoryService, CategoryService>();
-            container.RegisterType<IController, CategoryController>("Category");    
 
+            container.RegisterInstance<IUnityContainer>(container);
+
+            container.RegisterType<ICategoryService, CategoryService>();
+            container.RegisterType<IController, CategoryController>("Category");
+            container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IConfigService, ConfigService>();
+            container.RegisterType<IEmailService, EmailService>();
+            //ControllerBuilder.Current.SetControllerFactory(typeof(UnityControllerFactory));
             return container;
+
         }
     }
 }

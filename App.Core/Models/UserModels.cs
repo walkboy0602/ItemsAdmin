@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Web.Mvc;
 
 namespace App.Core.Data
 {
@@ -46,7 +47,7 @@ namespace App.Core.Data
         //public Nullable<System.DateTime> LastLoginDate { get; set; }
     }
 
-    public class RegisterUser
+    public class RegisterModel
     {
         [Key]
         public int UserId { get; set; }
@@ -63,7 +64,12 @@ namespace App.Core.Data
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class RegisterFullModel : RegisterModel
+    {
+
     }
 }

@@ -13,13 +13,13 @@ namespace App.Core.Data
         public Nullable<int> ChildrenCount { get; set; }
     }
 
-    [MetadataType(typeof(ListingMetaData))]
+    [MetadataType(typeof(ListingModel))]
     public partial class Listing
     {
 
     }
 
-    public class ListingMetaData
+    public class ListingModel
     {
         [Key]
         public int id { get; set; }
