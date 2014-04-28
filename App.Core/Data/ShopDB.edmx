@@ -105,6 +105,32 @@ warning 6002: The table/view 'ShopDB.dbo.ListingImageDeleted' does not have a pr
           <Property Name="Text" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Sort" Type="smallint" Nullable="false" />
         </EntityType>
+        <EntityType Name="Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="EmailConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsEmailConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+          <Property Name="IsMobileConfirmed" Type="bit" />
+          <Property Name="IsIdentificationConfirmed" Type="bit" />
+        </EntityType>
+        <EntityType Name="OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="RefCategory">
           <Key>
             <PropertyRef Name="id" />
@@ -175,6 +201,13 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="sort" Type="int" />
         </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -206,9 +239,9 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" />
           <Property Name="Mobile" Type="varchar" MaxLength="50" />
           <Property Name="Identification" Type="varchar" MaxLength="100" />
           <Property Name="IdentificationFile" Type="varchar" MaxLength="100" />
@@ -221,38 +254,6 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
           <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="USERGUID" Type="uniqueidentifier" />
-        </EntityType>
-        <EntityType Name="webpages_Membership">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="CreateDate" Type="datetime" />
-          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
-          <Property Name="IsConfirmed" Type="bit" />
-          <Property Name="LastPasswordFailureDate" Type="datetime" />
-          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="PasswordChangedDate" Type="datetime" />
-          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
-          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="webpages_OAuthMembership">
-          <Key>
-            <PropertyRef Name="Provider" />
-            <PropertyRef Name="ProviderUserId" />
-          </Key>
-          <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="webpages_Roles">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <Association Name="FK__ListingSp__Listi__2F10007B">
           <End Role="Listing" Type="Self.Listing" Multiplicity="1" />
@@ -307,13 +308,13 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
           <EntitySet Name="ListingImage" EntityType="Self.ListingImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListingOption" EntityType="Self.ListingOption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListingSpec" EntityType="Self.ListingSpec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Membership" EntityType="Self.Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OAuthMembership" EntityType="Self.OAuthMembership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RefCategory" EntityType="Self.RefCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSimple" EntityType="Self.UserSimple" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Account" EntityType="Self.Account" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Account].[ID] AS [ID], 
@@ -511,38 +512,6 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
           <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="USERGUID" Type="Guid" />
         </EntityType>
-        <EntityType Name="webpages_Membership">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IsConfirmed" Type="Boolean" />
-          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
-          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
-          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="webpages_OAuthMembership">
-          <Key>
-            <PropertyRef Name="Provider" />
-            <PropertyRef Name="ProviderUserId" />
-          </Key>
-          <Property Name="Provider" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="webpages_Roles">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="ID" />
@@ -689,9 +658,6 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
           <EntitySet Name="RefCategories" EntityType="Self.RefCategory" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserSimples" EntityType="Self.UserSimple" />
-          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
-          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" />
-          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
           <EntitySet Name="ListingImageDeleteds" EntityType="Self.ListingImageDeleted" />
@@ -715,19 +681,55 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
             <End Role="Listing" EntitySet="Listings" />
             <End Role="ListingOption" EntitySet="ListingOptions" />
           </AssociationSet>
+          <EntitySet Name="OAuthMemberships" EntityType="ShopDBModel.OAuthMembership" />
+          <EntitySet Name="Roles" EntityType="ShopDBModel.Role" />
           <EntitySet Name="UserProfiles" EntityType="ShopDBModel.UserProfile" />
+          <EntitySet Name="Memberships" EntityType="ShopDBModel.Membership" />
         </EntityContainer>
+        <EntityType Name="OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="UserProfile">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Identification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IdentificationFile" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="EmailConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsEmailConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="IsMobileConfirmed" Type="Boolean" />
+          <Property Name="IsIdentificationConfirmed" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -841,40 +843,6 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="webpages_Membership">
-            <EntityTypeMapping TypeName="ShopDBModel.webpages_Membership">
-              <MappingFragment StoreEntitySet="webpages_Membership">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
-                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
-                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
-                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
-                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
-                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
-                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="webpages_OAuthMembership">
-            <EntityTypeMapping TypeName="ShopDBModel.webpages_OAuthMembership">
-              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
-                <ScalarProperty Name="Provider" ColumnName="Provider" />
-                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="webpages_Roles">
-            <EntityTypeMapping TypeName="ShopDBModel.webpages_Roles">
-              <MappingFragment StoreEntitySet="webpages_Roles">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="ShopDBModel.Account">
               <MappingFragment StoreEntitySet="Account">
@@ -956,15 +924,50 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OAuthMemberships">
+            <EntityTypeMapping TypeName="ShopDBModel.OAuthMembership">
+              <MappingFragment StoreEntitySet="OAuthMembership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ShopDBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserProfiles">
             <EntityTypeMapping TypeName="ShopDBModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
                 <ScalarProperty Name="IdentificationFile" ColumnName="IdentificationFile" />
                 <ScalarProperty Name="Identification" ColumnName="Identification" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memberships">
+            <EntityTypeMapping TypeName="ShopDBModel.Membership">
+              <MappingFragment StoreEntitySet="Membership">
+                <ScalarProperty Name="IsIdentificationConfirmed" ColumnName="IsIdentificationConfirmed" />
+                <ScalarProperty Name="IsMobileConfirmed" ColumnName="IsMobileConfirmed" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="IsEmailConfirmed" ColumnName="IsEmailConfirmed" />
+                <ScalarProperty Name="EmailConfirmationToken" ColumnName="EmailConfirmationToken" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -15,9 +15,12 @@ namespace App.Core.Services
     public interface IUserService
     {
         // UserProfiles 
-        //UserProfile GetUserProfile(string userName);
-        //UserProfile GetUserProfile(int userId);
+        UserProfile GetUserProfile(string userName);
+        UserProfile GetUserProfile(int userId);
         void Save(UserProfile userProfile);
+
+        // Membership
+        void Save(App.Core.Data.Membership membership, bool add);
 
         // Helper to do 
         string GetHash(string text);
@@ -42,11 +45,32 @@ namespace App.Core.Services
             db = new ShopDBEntities();
         }
 
+
+        UserProfile IUserService.GetUserProfile(string userName)
+        {
+            return this.db.UserProfiles.FirstOrDefault(x => x.UserName.Equals(userName));
+        }
+
+        UserProfile IUserService.GetUserProfile(int userId)
+        {
+            return this.db.UserProfiles.FirstOrDefault(x => x.UserId.Equals(userId));
+        }
+
         void IUserService.Save(UserProfile userProfile)
         {
             if (userProfile.UserId == 0)
             {
                 this.db.UserProfiles.Add(userProfile);
+            }
+
+            this.db.SaveChanges();
+        }
+
+        void IUserService.Save(App.Core.Data.Membership membership, bool add)
+        {
+            if (add)
+            {
+                this.db.Memberships.Add(membership);
             }
 
             this.db.SaveChanges();

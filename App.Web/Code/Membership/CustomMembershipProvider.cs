@@ -229,27 +229,26 @@ namespace App.Web.Code.Membership
         {
             userName = userName.Trim().ToLower();
 
-            //var userProfile = this.usersService.GetUserProfile(userName);
-            //if (userProfile != null)
-            //{
-            //    throw new MembershipCreateUserException(MembershipCreateStatus.DuplicateEmail);
-            //}
-
-            var newUserProfile = new UserProfile { Email = userName };
-        
-
-            var membership = new App.Core.Data.UserProfile 
+            var userProfile = this.usersService.GetUserProfile(userName);
+            if (userProfile != null)
             {
-                //UserId = newUserProfile.UserId,
-                Email = userName
-                //CreateDate = DateTime.Now,
-                //PasswordSalt = this.usersService.GetHash(password),
-                //IsConfirmed = false,
-                //ConfirmationToken = Guid.NewGuid().ToString().ToLower()
-            };
-            this.usersService.Save(membership);
+                throw new MembershipCreateUserException(MembershipCreateStatus.DuplicateEmail);
+            }
 
-            return "";
+            var newUserProfile = new UserProfile { UserName = userName };
+            this.usersService.Save(newUserProfile);
+
+            var membership = new App.Core.Data.Membership 
+            {
+                UserId = newUserProfile.UserId,
+                CreateDate = DateTime.Now,
+                PasswordSalt = this.usersService.GetHash(password),
+                IsEmailConfirmed = false,
+                EmailConfirmationToken = Guid.NewGuid().ToString().ToLower()
+            };
+            this.usersService.Save(membership, add: true);
+
+            return membership.EmailConfirmationToken;
         }
 
         public override bool DeleteAccount(string userName)

@@ -109,38 +109,6 @@
     <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="USERGUID" Type="Guid" />
   </EntityType>
-  <EntityType Name="webpages_Membership">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="IsConfirmed" Type="Boolean" />
-    <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
-    <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
-    <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="webpages_OAuthMembership">
-    <Key>
-      <PropertyRef Name="Provider" />
-      <PropertyRef Name="ProviderUserId" />
-    </Key>
-    <Property Name="Provider" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ProviderUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="webpages_Roles">
-    <Key>
-      <PropertyRef Name="RoleId" />
-    </Key>
-    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-  </EntityType>
   <EntityType Name="Account">
     <Key>
       <PropertyRef Name="ID" />
@@ -287,9 +255,6 @@
     <EntitySet Name="RefCategories" EntityType="Self.RefCategory" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="UserSimples" EntityType="Self.UserSimple" />
-    <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
-    <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" />
-    <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
     <EntitySet Name="Accounts" EntityType="Self.Account" />
     <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
     <EntitySet Name="ListingImageDeleteds" EntityType="Self.ListingImageDeleted" />
@@ -313,18 +278,54 @@
       <End Role="Listing" EntitySet="Listings" />
       <End Role="ListingOption" EntitySet="ListingOptions" />
     </AssociationSet>
+    <EntitySet Name="OAuthMemberships" EntityType="ShopDBModel.OAuthMembership" />
+    <EntitySet Name="Roles" EntityType="ShopDBModel.Role" />
     <EntitySet Name="UserProfiles" EntityType="ShopDBModel.UserProfile" />
+    <EntitySet Name="Memberships" EntityType="ShopDBModel.Membership" />
   </EntityContainer>
+  <EntityType Name="OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="UserProfile">
     <Key>
       <PropertyRef Name="UserId" />
     </Key>
     <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Identification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="IdentificationFile" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="EmailConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsEmailConfirmed" Type="Boolean" />
+    <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+    <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+    <Property Name="IsMobileConfirmed" Type="Boolean" />
+    <Property Name="IsIdentificationConfirmed" Type="Boolean" />
   </EntityType>
 </Schema>

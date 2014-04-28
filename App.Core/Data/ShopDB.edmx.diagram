@@ -12,9 +12,6 @@
         <EntityTypeShape EntityType="ShopDBModel.RefCategory" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopDBModel.User" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopDBModel.UserSimple" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopDBModel.webpages_Membership" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopDBModel.webpages_OAuthMembership" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShopDBModel.webpages_Roles" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopDBModel.Account" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopDBModel.AccountType" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShopDBModel.ListingImageDeleted" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
@@ -26,7 +23,10 @@
         <AssociationConnector Association="ShopDBModel.FK_Listing_ListingID" ManuallyRouted="false" />
         <AssociationConnector Association="ShopDBModel.FK_RefCategory_CategoryID" ManuallyRouted="false" />
         <AssociationConnector Association="ShopDBModel.ListingOption_ListingID_FK" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ShopDBModel.UserProfile" Width="1.5" PointX="5.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ShopDBModel.OAuthMembership" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ShopDBModel.Role" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ShopDBModel.UserProfile" Width="1.5" PointX="12.75" PointY="7.75" />
+        <EntityTypeShape EntityType="ShopDBModel.Membership" Width="1.5" PointX="5.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
