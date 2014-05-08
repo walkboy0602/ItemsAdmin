@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "success";
+    Layout = "~/Views/Shared/_AdminLayoutHome.cshtml";
+}
+
+<div class="login-wrapper">
+    <div class="box-success">
+        <div class="content-wrap">
+            <h2>Your registration was successfull, but your account is not activated.</h2>
+
+            <p>
+                Email message with instructions has been sent to @ViewBag.email.
+                You will receive this message instantly (or in 5-10 minutes).
+            </p>
+
+            <p>
+                Please, check your mailbox to activate your account.
+                If the mail message with account activation did not received for a long time,
+                check your Junk folder. Also check email adddress service@somecompany.com is not in black list of your mailbox.
+            </p>
+
+        </div>
+    </div>
+</div>
+

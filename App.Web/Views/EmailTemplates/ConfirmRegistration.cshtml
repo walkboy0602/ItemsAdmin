@@ -1,0 +1,34 @@
+﻿@model App.Core.Data.UserProfile
+
+@{ 
+    var membership = (App.Core.Data.Membership)ViewBag.Membership;
+    var sendEmailModel = (App.Core.Models.SendEmailModel)ViewBag.SendEmailModel; 
+    var activationLink = sendEmailModel.WebsiteURL + Url.Action("confirmation", "register", new { guid = membership.EmailConfirmationToken, area = "account" }); 
+}
+
+<p>
+Dear @Model.LastName,
+</p>
+<p></p>
+<p>
+    With your email address it was registered new account at <a href="@sendEmailModel.WebsiteURL">@sendEmailModel.WebsiteUrlName</a>.<br />
+    To activate your account, go tob the link:<br />
+    <a href="@activationLink ">@activationLink</a>
+</p>
+<p>
+    If you did not perform a registration new account just ignore this email message, maybe someone made a mistake.
+</p>
+
+<p>
+    We are welcome your registration at <a href="@sendEmailModel.WebsiteURL">@sendEmailModel.WebsiteUrlName</a>.<br />
+    We are asking for confirmation of your account registration to get sure of valid email.<br />
+    It is required to avoid forgery emails.
+</p>
+<br />
+<br />
+<p>
+    Best regards,<br />
+    <a href="@sendEmailModel.WebsiteURL">@sendEmailModel.WebsiteUrlName</a>.<br />
+</p>
+
+<small>Message has been generated automatically.</small>

@@ -4,6 +4,7 @@ using Unity.Mvc3;
 using App.Web.Controllers;
 using App.Core.Services;
 using App.Web.Code.Unity;
+using System.Net.Mail;
 
 namespace App.Web
 {
@@ -32,6 +33,7 @@ namespace App.Web
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IConfigService, ConfigService>();
             container.RegisterType<IEmailService, EmailService>();
+            container.RegisterType<SmtpClient>(new InjectionConstructor());
             //ControllerBuilder.Current.SetControllerFactory(typeof(UnityControllerFactory));
             return container;
 

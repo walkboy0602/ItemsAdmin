@@ -218,7 +218,6 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListingController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -645,18 +644,18 @@
     <Content Include="Scripts\jquery\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery\jquery-ui-1.8.24.min.js" />
-    <Content Include="Scripts\jquery\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\validation\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\validation\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\ckeditor\plugins\scayt\LICENSE.md" />
     <Content Include="Scripts\ckeditor\plugins\scayt\README.md" />
     <Content Include="Scripts\ckeditor\plugins\wsc\LICENSE.md" />
     <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
     <Content Include="Scripts\ckeditor\skins\moonocolor\readme.md" />
-    <None Include="Scripts\jquery\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery\jquery.validate.js" />
-    <Content Include="Scripts\jquery\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery\jquery.validate.unobtrusive.min.js" />
+    <None Include="Scripts\validation\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\validation\jquery.validate.js" />
+    <Content Include="Scripts\validation\jquery.validate.min.js" />
+    <Content Include="Scripts\validation\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\validation\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\jquery\knockout-2.2.0.js" />
     <Content Include="Scripts\jquery\modernizr-2.6.2.js" />

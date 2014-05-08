@@ -1,0 +1,71 @@
+﻿@model App.Web.Areas.Account.Models.RegisterModel
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_AdminLayoutHome.cshtml";
+}
+<div class="header">
+    <a href="http://detail.herokuapp.com/index.html">
+        <img src="http://detail.herokuapp.com/img/logo.png" class="logo" alt="logo">
+    </a>
+</div>
+
+<div class="signup-wrapper">
+    <div class="box">
+        <div class="content-wrap">
+            <h6>Sign Up</h6>
+            @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", placeholder = "First name" })
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                            @Html.ValidationMessageFor(model => model.LastName)
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "E-mail address", autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.Email)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password", autocomplete = "off" })
+                                @Html.ValidationMessageFor(model => model.Password)
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+
+                                @Html.ValidationSummary(true)
+                            </div>
+
+                            <div class="action form-group">
+                                <input type="submit" value="SIGN UP" class="btn-glow primary signup" />
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+    <div class="already">
+        <p>Already have an account?</p>
+        @Html.ActionLink("Sign in", "index", "login", new { area = "account" }, null)
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -389,6 +389,7 @@ textarea::-webkit-input-placeholder  {
     
 }
 /* dropdown menu */
+.dropdown-menu > li > form > a,
 .dropdown-menu > li > a  {
     
 	font-size:  13px;
@@ -396,7 +397,9 @@ textarea::-webkit-input-placeholder  {
 	outline:  none;
     
 }
-.dropdown-menu > li > a: hover, 
+.dropdown-menu > li > form a:hover,
+.dropdown-menu > li > form a:focus,
+.dropdown-menu > li > a:hover, 
 .dropdown-menu > li > a:focus, 
 .dropdown-submenu:hover > a, 
 .dropdown-submenu:focus > a  {

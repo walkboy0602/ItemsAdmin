@@ -13,6 +13,13 @@ namespace App.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //-- signup Route
+            routes.MapRoute(
+                name: "SignUp",
+                url: "SignUp",
+                defaults: new { controller = "Home", action = "SignUp" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

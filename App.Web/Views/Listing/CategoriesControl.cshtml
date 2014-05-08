@@ -1,0 +1,22 @@
+﻿@model App.Core.Data.ListingModels
+
+@*<div class="field-box">
+        <label>MVC Category</label>
+        <div class="col-md-8">
+            @Html.Partial("CategoriesControl", Model)
+        </div>
+    </div>
+    <div class="field-box">
+        <label>MVC Sub Category</label>
+        <div id="SubCategories" class="col-md-8">
+            @Html.DropDownListFor(m => m.SubCategoryID, Enumerable.Empty<SelectListItem>(), new { @id = "ddlSubCategory", @class = "form-control"})
+        </div>
+    </div>*@
+
+@using (Ajax.BeginForm("SelectCategory", "DropDown", new AjaxOptions { UpdateTargetId = "SubCategories" }))
+{
+    @Html.DropDownListFor(m => m.CategoryID,
+                (IEnumerable<SelectListItem>)ViewBag.Categories,
+                new { @class = "form-control dd" })
+
+}

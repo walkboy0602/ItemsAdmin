@@ -34,6 +34,13 @@ warning 6002: The table/view 'ShopDB.dbo.AccountType' does not have a primary ke
           <Property Name="Type" Type="tinyint" Nullable="false" />
           <Property Name="ExpireDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="Listing">
           <Key>
             <PropertyRef Name="id" />
@@ -239,7 +246,7 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
           <Property Name="LastName" Type="nvarchar" MaxLength="100" />
           <Property Name="Mobile" Type="varchar" MaxLength="50" />
@@ -304,6 +311,7 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ShopDBModelStoreContainer">
+          <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Listing" EntityType="Self.Listing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListingImage" EntityType="Self.ListingImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListingOption" EntityType="Self.ListingOption" Schema="dbo" store:Type="Tables" />
@@ -683,8 +691,9 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
           </AssociationSet>
           <EntitySet Name="OAuthMemberships" EntityType="ShopDBModel.OAuthMembership" />
           <EntitySet Name="Roles" EntityType="ShopDBModel.Role" />
-          <EntitySet Name="UserProfiles" EntityType="ShopDBModel.UserProfile" />
           <EntitySet Name="Memberships" EntityType="ShopDBModel.Membership" />
+          <EntitySet Name="UserProfiles" EntityType="ShopDBModel.UserProfile" />
+          <EntitySet Name="Configs" EntityType="ShopDBModel.Config" />
         </EntityContainer>
         <EntityType Name="OAuthMembership">
           <Key>
@@ -702,18 +711,6 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
           <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="UserProfile">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Identification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdentificationFile" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Membership">
           <Key>
             <PropertyRef Name="UserId" />
@@ -730,6 +727,25 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
           <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
           <Property Name="IsMobileConfirmed" Type="Boolean" />
           <Property Name="IsIdentificationConfirmed" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Identification" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdentificationFile" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -941,19 +957,6 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserProfiles">
-            <EntityTypeMapping TypeName="ShopDBModel.UserProfile">
-              <MappingFragment StoreEntitySet="UserProfile">
-                <ScalarProperty Name="IdentificationFile" ColumnName="IdentificationFile" />
-                <ScalarProperty Name="Identification" ColumnName="Identification" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Memberships">
             <EntityTypeMapping TypeName="ShopDBModel.Membership">
               <MappingFragment StoreEntitySet="Membership">
@@ -969,6 +972,27 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
                 <ScalarProperty Name="EmailConfirmationToken" ColumnName="EmailConfirmationToken" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="ShopDBModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="IdentificationFile" ColumnName="IdentificationFile" />
+                <ScalarProperty Name="Identification" ColumnName="Identification" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configs">
+            <EntityTypeMapping TypeName="ShopDBModel.Config">
+              <MappingFragment StoreEntitySet="Config">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

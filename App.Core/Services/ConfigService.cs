@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
+using System.Web;
 
 namespace App.Core.Services
 {
@@ -14,6 +16,13 @@ namespace App.Core.Services
         public static readonly ConfigName WebsiteUrlName = new ConfigName("WebsiteUrlName");
         public static readonly ConfigName WebsiteTitle = new ConfigName("WebsiteTitle");
         public static readonly ConfigName WebsiteUrl = new ConfigName("WebsiteUrl");
+
+        public static readonly ConfigName EmailHost = new ConfigName("EmailHost");
+        public static readonly ConfigName EmailUsername = new ConfigName("EmailUsername");
+        public static readonly ConfigName EmailPassword = new ConfigName("EmailPassword");
+        public static readonly ConfigName EmailPort = new ConfigName("EmailPort");
+        public static readonly ConfigName EmailEnableSSL = new ConfigName("EmailEnableSSL");
+        public static readonly ConfigName EmailFrom = new ConfigName("EmailFrom");
 
         private ConfigName(String name)
         {
@@ -35,17 +44,26 @@ namespace App.Core.Services
 
     public class ConfigService : IConfigService
     {
-        private readonly IDatabaseContext db;
+        private ShopDBEntities db;
 
-        public ConfigService(IDatabaseContext db)
+        public ConfigService()
         {
-            this.db = db;
+            this.db = new ShopDBEntities();
         }
 
-        string IConfigService.GetValue(ConfigName name)
+        string IConfigService.GetValue(ConfigName configName)
         {
-            var config = this.db.Configs.FirstOrDefault(x => x.Key.Equals(name.ToString()));
-            if (config != null)
+            IDictionary<string, string> ConfigList = (IDictionary<string, string>)HttpContext.Current.Cache["ConfigList"];
+
+            if (ConfigList == null)
+            {
+                ConfigList = db.Configs.ToDictionary(x => x.Key, x => x.Value);
+                HttpContext.Current.Cache.Insert("ConfigList", ConfigList, null, DateTime.Now.AddSeconds(3600), System.Web.Caching.Cache.NoSlidingExpiration);
+            }
+
+            string name = configName.ToString();
+            var config = ConfigList.FirstOrDefault(x => x.Key.Equals(name));
+            if (!string.IsNullOrEmpty(config.Key))
             {
                 return config.Value;
             }
@@ -59,6 +77,7 @@ namespace App.Core.Services
 
             return configs.ToDictionary(x => x.Key, x => x.Value);
         }
+
 
     }
 }

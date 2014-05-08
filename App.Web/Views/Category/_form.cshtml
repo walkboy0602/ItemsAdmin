@@ -14,7 +14,7 @@
             <div class="field-box">
                 <label>Parent Category</label>
                 <div class="col-md-8">
-                    @*@Html.DropDownListFor(m => m.ParentID, ViewBag.Categories as IEnumerable<SelectListItem>, "-", new { @class = "form-control" })*@
+                    @Html.DropDownListFor(m => m.ParentID, ViewBag.Categories as IEnumerable<SelectListItem>, "-", new { @class = "form-control" })
                     @*@Html.DropDownGroupListFor(m => m.ParentID, ViewBag.Categories as IEnumerable<GroupedSelectListItem>, "",
                         new
                         {

@@ -199,6 +199,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Account\AccountAreaRegistration.cs" />
+    <Compile Include="Areas\Account\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Account\Controllers\LogoffController.cs" />
+    <Compile Include="Areas\Account\Controllers\RegisterController.cs" />
+    <Compile Include="Areas\Account\Models\LoginModel.cs" />
+    <Compile Include="Areas\Account\Models\RegisterModel.cs" />
+    <Compile Include="Code\Filters\ValidateOnlyIncomingValuesAttribute.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Code\Membership\CustomMembershipProvider.cs" />
     <Compile Include="Code\Membership\CustomRoleProvider.cs" />
@@ -206,10 +214,9 @@
     <Compile Include="Code\Unity\HttpContextLifetimeManager.cs" />
     <Compile Include="Code\Unity\IUnityContainerAccessor.cs" />
     <Compile Include="Code\Unity\UnityControllerFactory.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\ListingController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -218,6 +225,37 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\bootstrap.datepicker.css" />
+    <Content Include="Content\bootstrap\font-awesome.css" />
+    <Content Include="Content\bootstrap\font-awesome.min.css" />
+    <Content Include="Content\fileupload\jquery.fileupload-ui.css" />
+    <Content Include="Content\fileupload\jquery.fileupload.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\themes\admin\bootstrap-overrides.css" />
+    <Content Include="Content\themes\admin\global\elements.css" />
+    <Content Include="Content\themes\admin\global\icons.css" />
+    <Content Include="Content\themes\admin\global\layout.css" />
+    <Content Include="Content\themes\admin\global\table.css" />
+    <Content Include="Content\themes\admin\img\uniform\sprite.png" />
+    <Content Include="Content\themes\admin\libraries\select2-bootstrap.css" />
+    <Content Include="Content\themes\admin\libraries\select2-spinner.gif" />
+    <Content Include="Content\themes\admin\libraries\select2.css" />
+    <Content Include="Content\themes\admin\libraries\select2.png" />
+    <Content Include="Content\themes\admin\libraries\select2x2.png" />
+    <Content Include="Content\themes\admin\libraries\uniform.default.css" />
+    <Content Include="Content\themes\admin\libraries\validationEngine.jquery.css" />
+    <Content Include="Content\themes\admin\module\form-showcase.css" />
+    <Content Include="Content\themes\admin\module\gallery.css" />
+    <Content Include="Content\themes\admin\module\signin.css" />
+    <Content Include="Content\themes\admin\module\signup.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -281,12 +319,31 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular\angularstrap\angular-strap.js" />
+    <Content Include="Scripts\angular\angularstrap\angular-strap.min.js" />
+    <Content Include="Scripts\angular\angularstrap\angular-strap.tpl.js" />
+    <Content Include="Scripts\angular\angularstrap\angular-strap.tpl.min.js" />
     <Content Include="Scripts\ckeditor\plugins\scayt\LICENSE.md" />
     <Content Include="Scripts\ckeditor\plugins\scayt\README.md" />
     <Content Include="Scripts\ckeditor\plugins\wsc\LICENSE.md" />
     <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
     <Content Include="Scripts\ckeditor\skins\moonocolor\readme.md" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\angular\angularstrap\angular-strap.min.js.map" />
+    <Content Include="Scripts\angular\angularstrap\angular-strap.tpl.min.js.map" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Account\Views\web.config" />
+    <Content Include="Areas\Account\Views\Register\Success.cshtml" />
+    <Content Include="Content\themes\admin\css" />
+    <Content Include="Areas\Account\Views\Login\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\angular\1.2.9\angular-resource.js" />
     <Content Include="Scripts\angular\1.2.9\angular-route.js" />
@@ -585,10 +642,28 @@
     <Content Include="Views\Shared\_AdminLayoutHome.cshtml" />
     <Content Include="Views\Category\_form.cshtml" />
     <Content Include="Scripts\select2\select2.jquery.json" />
-    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Areas\Account\Views\Register\index.cshtml" />
+    <Content Include="Views\Home\_RegisterPage2.cshtml" />
+    <Content Include="Views\EmailTemplates\ChangePassword.cshtml" />
+    <Content Include="Views\EmailTemplates\ConfirmRegistration.cshtml" />
+    <Content Include="Views\Listing\CategoriesControl.cshtml" />
+    <Content Include="Views\Listing\Create.cshtml" />
+    <Content Include="Views\Listing\Delete.cshtml" />
+    <Content Include="Views\Listing\Description.cshtml" />
+    <Content Include="Views\Listing\Details.cshtml" />
+    <Content Include="Views\Listing\Edit.cshtml" />
+    <Content Include="Views\Listing\Image.cshtml" />
+    <Content Include="Views\Listing\index.cshtml" />
+    <Content Include="Views\Listing\Option.cshtml" />
+    <Content Include="Views\Listing\Specification.cshtml" />
+    <Content Include="Views\Listing\SubCategoriesControl.cshtml" />
+    <Content Include="Views\Listing\_general.cshtml" />
+    <Content Include="Views\Listing\_menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Account\Views\Shared\" />
+    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -597,6 +672,10 @@
     <ProjectReference Include="..\App.Core\App.Core.csproj">
       <Project>{e2209b95-dddc-40e4-867b-1b276447202b}</Project>
       <Name>App.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{d46d95d5-3cdf-4edb-9790-57e66c2f855e}</Project>
+      <Name>Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -613,16 +692,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:81</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "Option";
+}
+
+<div data-ng-app="shopApp" data-ng-controller="ListingOptionCtrl">
+    <div class="header-row">
+        <div class="header-main">
+            <i class="fa fa-tags"></i>
+            <span class="breadcrumb">
+                @Html.ActionLink("Listings", "index")
+            </span>
+            /
+            <span>Options</span>
+        </div>
+        <div class="header-right">
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn" })
+            <input type="button" class="btn-glow success btn-finish" value="Save" data-ng-click="saveData()">
+        </div>
+    </div>
+
+    <div class="row ctrls">
+        @RenderPage("_menu.cshtml")
+        <div class="table-wrapper products-table section">
+            <input type="button" class="pull-right btn-flat primary" value="Add Option" data-ng-click="add()">
+            <div class="clearfix"></div>
+            <div class="tab-content">
+                <div class="table-wrapper products-table section">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-md-3">
+                                    <span class="line"></span>Title
+                                </th>
+                                <th class="col-md-2">
+                                    <span class="line"></span>Original Price
+                                </th>
+                                <th class="col-md-2">
+                                    <span class="line"></span>Discounted Price
+                                </th>
+                                <th class="col-md-2">
+                                    <span class="line"></span>Available Quantity
+                                </th>
+                                <th>
+                                    <span class="line"></span>Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="field in fields">
+                                @*Display*@
+                                <td>
+                                    <span>{{field.Title}}</span>
+                                </td>
+                                <td>
+                                    <span>{{field.OriginalPrice}}</span>
+                                </td>
+                                <td>
+                                    <span>{{field.DiscountedPrice}}</span>
+                                </td>
+                                <td>
+                                    <span>{{field.Quantity}}</span>
+                                </td>
+                                <td>
+                                    <i class="fa fa-edit fa-2x" data-ng-click="edit($index)"></i>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-times fa-2x" data-ng-click="delete($index)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal - Add / Edit Form -->
+    @*data-keyboard="false" data-backdrop="static"*@
+    <div class="modal fade" id="formModal" tabindex="-1" role="dialog">
+        <form>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" data-ng-show="mode=='addnew'">Add New Option</h4>
+                        <h4 class="modal-title" data-ng-show="mode=='edit'">Edit Option</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input class="form-control" data-validation-engine="validate[required, maxSize[50]]" placeholder="e.g- ipad 64 gb" data-ng-model="form.Title" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Original Price</label>
+                                <input id="oriPrice" class="form-control" data-validation-engine="validate[required, custom[number], min[0], funcCall[geThan[discPrice]]]"
+                                       placeholder="RM" data-ng-model="form.OriginalPrice" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Discounted Price</label>
+                                <input id="discPrice" class="form-control" data-validation-engine="validate[required, custom[number], min[0]]" placeholder="RM" data-ng-model="form.DiscountedPrice" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Available Quantity</label>
+                                <input class="form-control" data-validation-engine="validate[required,custom[integer],min[0]]" value="1" type="number" data-ng-model="form.Quantity" />
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Link To Image</label>
+                                <select class="form-control" data-ng-model="form.LinkToImage">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-glow" data-dismiss="modal">Close</button>
+                        <button type="button" data-ng-show="mode=='addnew'" class="btn-glow primary" data-ng-click="saveNew()">Save</button>
+                        <button type="button" data-ng-show="mode=='edit'" class="btn-glow primary" data-ng-click="editSave()">Save Changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </form>
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal - Delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Are you sure you want to delete <b>{{form.Title}}</b>?</h4>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-danger" data-ng-click="deleteConfirm()">Delete</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+<script type="text/javascript">
+    function geThan(field, rules, i, options) {
+        var a = rules[i + 2];
+        if (parseFloat(field.val()) < parseFloat(jQuery("#" + a).val())) {
+            return "Original Price must be greater than Discounted Price."
+        }
+    }
+</script>
+

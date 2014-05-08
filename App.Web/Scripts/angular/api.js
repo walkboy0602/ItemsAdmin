@@ -2,10 +2,10 @@
 //http://weblogs.asp.net/dwahlin/archive/2013/08/16/using-an-angularjs-factory-to-interact-with-a-restful-service.aspx
 
 angular.module('shopAPI', [])
-    .factory('UserFactory', ['$http', function ($http) {
+    .factory('AccountFactory', ['$http', function ($http) {
         return {
             register: function (data) {
-                return $http.post('/Register', data);
+                return $http.post('/account/register', data);
             },
             login: function (data) {
                 return $http.post('/api/user/login', data);
@@ -14,7 +14,7 @@ angular.module('shopAPI', [])
                 return $http.post('/api/user/logout', data);
             },
             validateEmail: function (data) {
-                return $http.post('/user/validateEmail', data);
+                return $http.post('/account/ValidateEmail', data);
             }
         }
     }])

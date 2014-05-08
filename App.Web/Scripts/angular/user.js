@@ -35,27 +35,53 @@ shopApp.controller("LoginController", ['$scope', 'UserFactory', '$route',
     }]);
 
 //Register Account v2
-function SignUpCtrl($scope, UserFactory)
+function SignUpCtrl($scope, AccountFactory, $alert)
 {
 
     $scope.form = {};
+    $scope.alerts = [];
 
     $scope.tab1 = function () {
 
         $('a[href="#tab1"]').tab('show');
     }
 
+
+
     $scope.tab2 = function () {
+
+
+        $alert({
+            title: 'opps!',
+            content: 'test',
+            container: '#alerts-container',
+            type: 'warning',
+            duration: 3,
+            show: true
+        });
+        //$scope.alerts.push($scope.alert);
+
+        console.log($alert);
+
+
         validate.validationEngine('validate');
 
         if (!isValid) return;
         console.log($scope.form);
-        UserFactory.register($scope.form)
+        AccountFactory.validateEmail($scope.form)
             .success(function (data) {
                 console.log('success');
             })
         .error(function (data, status) {
-            console.log('error');
+            console.log(data.Message);
+            console.log(status);
+            //$scope.alerts.push({ title: 'Opps!', content: data.Message, placement: 'top-right', type: 'warning', show: true });
+            //$scope.alert = $alert({ title: 'Holy guacamole!', content: 'Best check yo self, you\'re not looking too good.', placement: 'top', type: 'info', show: true, duration: 3 });
+
+            //$alert({
+            //    title: 'Opps!', content: data.Message, container: '#alerts-container',
+            //    type: 'warning', show: true, duration: 3
+            //});
         });
 
         //$('a[href="#tab2"]').tab('show');

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html class="login-bg" lang="en">
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title - My ASP.NET MVC Application</title>
@@ -14,16 +14,13 @@
 
 </head>
 <body data-ng-app="shopApp">
-    <div class="header">
-        <a href="http://detail.herokuapp.com/index.html">
-            <h1>Itemsss Admin</h1>
-        </a>
-    </div>
+
     @RenderBody()
 
    
     @Scripts.Render("~/bundles/common")
     @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angularstrap")
     @Scripts.Render("~/bundles/upload")
     @Scripts.Render("~/bundles/validation")
     @Scripts.Render("~/bundles/formplugin")

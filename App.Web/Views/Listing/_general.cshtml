@@ -1,0 +1,66 @@
+﻿@model App.Core.Data.Listing
+
+<div class="tab-pane active" id="general">
+    <div class="col-md-12">
+        @Html.ValidationSummary(true)
+        <div class="col-md-8">
+            <div class="field-box">
+                <label>Title</label>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control inline-input", placeholder = "Enter Title here." })
+                    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-inline" })
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Category</label>
+                <div class="col-md-6">
+                    @Html.DropDownListFor(m => m.CategoryID, ViewBag.Categories as IEnumerable<SelectListItem>, "",
+                                      new { @id = "s2Category", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CategoryID, null, new {  @class = "help-inline" })
+                </div>
+            </div>
+      
+            <div class="field-box">
+                <label>Original Price</label>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @placeholder = "RM" })
+                    @Html.ValidationMessageFor(m => m.Price, null, new { @class = "help-inline" })
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.Currency, new { Value = "RM" })
+            <div class="field-box">
+                <label>Discounted Price</label>
+                <div class="col-md-6">
+                    <input class="form-control" type="text"/>
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Available Quantity</label>
+                <div class="col-md-2">
+                   <input class="form-control" type="number" value="1" />
+                </div>
+            </div>
+            <div class="field-box">
+                <label>Negotiable</label>
+                <div class="col-md-8 ">
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(m => m.IsNegotiable)
+                            Yes
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- call this page plugins -->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#s2Category').select2({
+            placeholder: "Select a Category"
+        });
+    });
+</script>

@@ -1,6 +1,6 @@
 ﻿
 //declare a module
-var shopApp = angular.module("shopApp", ['shopAPI', 'ui.bootstrap', 'ngRoute', 'ngSanitize', 'ngResource'])
+var shopApp = angular.module("shopApp", ['shopAPI', 'ui.bootstrap', 'ngRoute', 'ngSanitize', 'ngResource', 'mgcrea.ngStrap'])
                     .config(function ($locationProvider, $routeProvider) {
                         $routeProvider.when('/listing/image/:id', {
                             controller: ListingImageCtrl

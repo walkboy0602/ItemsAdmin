@@ -1,0 +1,41 @@
+﻿@model App.Web.Areas.Account.Models.LoginModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayoutHome.cshtml";
+}
+
+<div class="login-wrapper">
+    <a href="index.html">
+        <img class="logo" src="http://detail.herokuapp.com/img/logo-white.png" alt="logo">
+    </a>
+
+
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="box">
+            <div class="content-wrap">
+                <h6>Log in</h6>
+                @Html.ValidationSummary(true)
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "E-mail address" })
+                @Html.ValidationMessageFor(m => m.UserName)
+
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Your password" })
+                @Html.ValidationMessageFor(m => m.Password)
+
+                <a href="#" class="forgot">Forgot password?</a>
+                <div class="remember">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "remember-me" })
+                </div>
+               
+                <input type="submit" value="Log in" class="btn-glow primary login" />
+            </div>
+        </div>
+    }
+    <div class="no-account">
+        <p>Don't have an account?</p>
+        @Html.ActionLink("Sign Up", "index", "register", new { area = "account" }, null)
+    </div>
+</div>

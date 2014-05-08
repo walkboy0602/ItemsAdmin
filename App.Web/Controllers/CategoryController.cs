@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using App.Core.Data;
 using App.Core.Services;
+using App.Core.ViewModel;
 
 namespace App.Web.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private ICategoryService _categoryService;
@@ -52,6 +54,7 @@ namespace App.Web.Controllers
         // GET: /Category/Create
         public ActionResult Create()
         {
+            ViewBag.Categories = new DropDownViewModel().GetCategories(db.RefCategories);
             return View();
         }
 
@@ -69,6 +72,7 @@ namespace App.Web.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Categories = new DropDownViewModel().GetCategories(db.RefCategories, refcategory.ParentID);
             return View(refcategory);
         }
 
@@ -84,6 +88,7 @@ namespace App.Web.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Categories = new DropDownViewModel().GetCategories(db.RefCategories, refcategory.ParentID);
             return View(refcategory);
         }
 
@@ -100,6 +105,7 @@ namespace App.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Categories = new DropDownViewModel().GetCategories(db.RefCategories, refcategory.ParentID);
             return View(refcategory);
         }
 

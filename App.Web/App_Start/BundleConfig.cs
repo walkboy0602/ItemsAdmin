@@ -73,6 +73,12 @@ namespace App.Web
                  "~/Scripts/angular/listing.js"
                  ));
 
+            //AngularStrap
+            bundles.Add(new ScriptBundle("~/bundles/angularstrap").Include(
+                 "~/Scripts/angular/angularstrap/angular-strap.js",
+                 "~/Scripts/angular/angularstrap/angular-strap.tpl.js"
+                 ));
+
             //File uploader
             bundles.Add(new ScriptBundle("~/bundles/upload").Include(
                 "~/Scripts/fileupload/vendor/jquery.ui.widget.js",
@@ -96,6 +102,8 @@ namespace App.Web
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                         "~/Content/bootstrap/bootstrap.css",
                         "~/Content/bootstrap/bootstrap.datepicker.css",
+                        "~/Content/bootstrap/bootstrap-theme.css",
+                        "~/Content/bootstrap/bootstrap-additions.css",
                         "~/Content/bootstrap/font-awesome.css"
                         ));
 
@@ -115,7 +123,8 @@ namespace App.Web
                         "~/Content/themes/admin/module/gallery.css",
                         "~/Content/fileupload/jquery.fileupload-ui.css",
                         "~/Content/fileupload/jquery.fileupload.css",
-                        "~/Content/themes/admin/module/signup.css"
+                        "~/Content/themes/admin/module/signup.css",
+                        "~/Content/themes/admin/module/signin.css"
                         ));
         }
     }

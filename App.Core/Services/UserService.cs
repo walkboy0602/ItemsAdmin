@@ -21,6 +21,10 @@ namespace App.Core.Services
 
         // Membership
         void Save(App.Core.Data.Membership membership, bool add);
+        App.Core.Data.Membership GetMembership(int userId);
+
+        // Emails
+        void SendAccountActivationMail(string email);
 
         // Helper to do 
         string GetHash(string text);
@@ -29,20 +33,15 @@ namespace App.Core.Services
 
     public class UserService : IUserService
     {
-        //private readonly IConfigService configService;
-        //private readonly IEmailService emailService;
+        private readonly IConfigService configService;
+        private readonly IEmailService emailService;
         private ShopDBEntities db;
 
-        //public UserService(IConfigService configService, IEmailService emailService)
-        //{
-        //    db = new ShopDBEntities();
-        //    this.configService = configService;
-        //    this.emailService = emailService;
-        //}
-
-        public UserService()
+        public UserService(IConfigService configService, IEmailService emailService)
         {
             db = new ShopDBEntities();
+            this.configService = configService;
+            this.emailService = emailService;
         }
 
 
@@ -74,6 +73,42 @@ namespace App.Core.Services
             }
 
             this.db.SaveChanges();
+        }
+
+        App.Core.Data.Membership IUserService.GetMembership(int userId)
+        {
+            return this.db.Memberships.FirstOrDefault(x => x.UserId == userId);
+        }
+
+        void IUserService.SendAccountActivationMail(string email)
+        {
+            var userProfile = (this as IUserService).GetUserProfile(email);
+            if (userProfile == null)
+            {
+                throw new MembershipCreateUserException(MembershipCreateStatus.ProviderError);
+            }
+
+            var membership = (this as IUserService).GetMembership(userProfile.UserId);
+            if (membership == null)
+            {
+                throw new MembershipCreateUserException(MembershipCreateStatus.ProviderError);
+            }
+
+            var configValues = this.configService.GetValues(new ConfigName[] { ConfigName.WebsiteUrlName, ConfigName.WebsiteTitle, ConfigName.WebsiteUrl });
+            var viewData = new ViewDataDictionary { Model = userProfile };
+            viewData.Add("Membership", membership);
+            this.emailService.SendEmail(
+                new SendEmailModel
+                {
+                    EmailAddress = email,
+                    Subject = configValues[ConfigName.WebsiteUrlName.ToString()] + ": Confirm your registration",
+                    WebsiteUrlName = configValues[ConfigName.WebsiteUrlName.ToString()],
+                    WebsiteTitle = configValues[ConfigName.WebsiteTitle.ToString()],
+                    WebsiteURL = configValues[ConfigName.WebsiteUrl.ToString()]
+                },
+                "ConfirmRegistration",
+                viewData
+            );
         }
 
         private string salt = "HJIO6589";

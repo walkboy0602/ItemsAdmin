@@ -25,8 +25,9 @@
         <AssociationConnector Association="ShopDBModel.ListingOption_ListingID_FK" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ShopDBModel.OAuthMembership" Width="1.5" PointX="0.75" PointY="8.75" />
         <EntityTypeShape EntityType="ShopDBModel.Role" Width="1.5" PointX="2.75" PointY="8.75" />
-        <EntityTypeShape EntityType="ShopDBModel.UserProfile" Width="1.5" PointX="12.75" PointY="7.75" />
         <EntityTypeShape EntityType="ShopDBModel.Membership" Width="1.5" PointX="5.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ShopDBModel.UserProfile" Width="1.5" PointX="12.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ShopDBModel.Config" Width="1.5" PointX="12.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

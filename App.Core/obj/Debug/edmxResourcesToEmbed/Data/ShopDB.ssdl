@@ -29,6 +29,13 @@ warning 6002: The table/view 'ShopDB.dbo.AccountType' does not have a primary ke
     <Property Name="Type" Type="tinyint" Nullable="false" />
     <Property Name="ExpireDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="Config">
+    <Key>
+      <PropertyRef Name="Key" />
+    </Key>
+    <Property Name="Key" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
   <EntityType Name="Listing">
     <Key>
       <PropertyRef Name="id" />
@@ -234,7 +241,7 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
       <PropertyRef Name="UserId" />
     </Key>
     <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
     <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
     <Property Name="LastName" Type="nvarchar" MaxLength="100" />
     <Property Name="Mobile" Type="varchar" MaxLength="50" />
@@ -299,6 +306,7 @@ warning 6002: The table/view 'ShopDB.dbo.RegionZone' does not have a primary key
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ShopDBModelStoreContainer">
+    <EntitySet Name="Config" EntityType="Self.Config" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Listing" EntityType="Self.Listing" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListingImage" EntityType="Self.ListingImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListingOption" EntityType="Self.ListingOption" Schema="dbo" store:Type="Tables" />

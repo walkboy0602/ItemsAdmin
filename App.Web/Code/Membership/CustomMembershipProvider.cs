@@ -163,35 +163,35 @@ namespace App.Web.Code.Membership
 
         public override bool ValidateUser(string username, string password)
         {
-            //var userProfile = this.usersService.GetUserProfile(username);
-            //if (userProfile == null)
+            var userProfile = this.usersService.GetUserProfile(username);
+            if (userProfile == null)
+            {
+                return false;
+            }
+            var membership = this.usersService.GetMembership(userProfile.UserId);
+            if (membership == null)
+            {
+                return false;
+            }
+            //if (!membership.IsEmailConfirmed)
             //{
             //    return false;
             //}
-            //var membership = this.usersService.GetMembership(userProfile.UserId);
-            //if (membership == null)
-            //{
-            //    return false;
-            //}
-            //if (!membership.IsConfirmed)
-            //{
-            //    return false;
-            //}
-            //if (membership.PasswordSalt == this.usersService.GetHash(password))
-            //{
-            //    return true;
-            //}
-            //// first once time we can validate through membership ConfirmationToken, 
-            //// to be logged in immediately after confirmation
-            //if (membership.ConfirmationToken != null)
-            //{
-            //    if (membership.ConfirmationToken == password)
-            //    {
-            //        membership.ConfirmationToken = null;
-            //        this.usersService.Save(membership, add: false);
-            //        return true;
-            //    }
-            //}
+            if (membership.PasswordSalt == this.usersService.GetHash(password))
+            {
+                return true;
+            }
+            // first once time we can validate through membership ConfirmationToken, 
+            // to be logged in immediately after confirmation
+            if (membership.EmailConfirmationToken != null)
+            {
+                if (membership.EmailConfirmationToken == password)
+                {
+                    membership.EmailConfirmationToken = null;
+                    this.usersService.Save(membership, add: false);
+                    return true;
+                }
+            }
             return false;
         }
 
@@ -232,13 +232,18 @@ namespace App.Web.Code.Membership
             var userProfile = this.usersService.GetUserProfile(userName);
             if (userProfile != null)
             {
-                throw new MembershipCreateUserException(MembershipCreateStatus.DuplicateEmail);
+                //throw new MembershipCreateUserException(MembershipCreateStatus.DuplicateEmail);
             }
 
-            var newUserProfile = new UserProfile { UserName = userName };
+            var newUserProfile = new UserProfile
+            {
+                UserName = userName,
+                FirstName = Convert.ToString(values.Where(v => v.Key == "FirstName").Select(v => v.Value).FirstOrDefault()),
+                LastName = Convert.ToString(values.Where(v => v.Key == "LastName").Select(v => v.Value).FirstOrDefault())
+            };
             this.usersService.Save(newUserProfile);
 
-            var membership = new App.Core.Data.Membership 
+            var membership = new App.Core.Data.Membership
             {
                 UserId = newUserProfile.UserId,
                 CreateDate = DateTime.Now,
