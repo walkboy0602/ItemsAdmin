@@ -207,3 +207,7 @@ C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\obj\Debug\App.Web.pdb
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Framework.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\AWSSDK.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Framework.pdb
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Autofac.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Autofac.Integration.Mvc.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Autofac.xml
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Autofac.Integration.Mvc.xml

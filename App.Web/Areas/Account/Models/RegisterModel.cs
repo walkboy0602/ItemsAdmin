@@ -33,5 +33,11 @@ namespace App.Web.Areas.Account.Models
         [Required(ErrorMessage = "Last Name is required")]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Mobile Phone")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^([0])([1])([0-9])\-[0-9]{7,8}", ErrorMessage = "Invalid phone number. It should be in the format of 012-3456789.")]
+        public string Mobile { get; set; }
     }
 }

@@ -119,13 +119,23 @@ namespace App.Web
                         "~/Content/themes/admin/global/elements.css",
                         "~/Content/themes/admin/global/icons.css",
                         "~/Content/themes/admin/global/table.css",
+                        "~/Content/themes/admin/global/custom.css",
                         "~/Content/themes/admin/module/form-showcase.css",
+                        "~/Content/themes/admin/module/verification.css",
                         "~/Content/themes/admin/module/gallery.css",
                         "~/Content/fileupload/jquery.fileupload-ui.css",
-                        "~/Content/fileupload/jquery.fileupload.css",
+                        "~/Content/fileupload/jquery.fileupload.css"
+                        ));
+
+            //Annomous Themes
+            bundles.Add(new StyleBundle("~/Content/themes/admin/css/annoymous").Include(
+                        "~/Content/common.css",
+                        "~/Content/themes/admin/bootstrap-overrides.css",
+                        "~/Content/themes/admin/global/layout.css",
+                        "~/Content/themes/admin/global/elements.css",
                         "~/Content/themes/admin/module/signup.css",
                         "~/Content/themes/admin/module/signin.css"
-                        ));
+                ));
         }
     }
 }

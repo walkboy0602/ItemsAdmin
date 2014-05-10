@@ -128,4 +128,3 @@ C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Core\obj\Debug\App.Core.Re
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Core\obj\Debug\App.Core.csproj.GenerateResource.Cache
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Core\obj\Debug\App.Core.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Core\obj\Debug\App.Core.pdb
-C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Core\obj\Debug\App.Core.csprojResolveAssemblyReference.cache

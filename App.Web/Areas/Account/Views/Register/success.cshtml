@@ -1,22 +1,28 @@
 ﻿@{
     ViewBag.Title = "success";
-    Layout = "~/Views/Shared/_AdminLayoutHome.cshtml";
+    Layout = "~/Areas/Account/Views/Shared/_AnnoymousLayout.cshtml";
 }
+<div class="header">
+    <a href="http://detail.herokuapp.com/index.html">
+        <img src="http://detail.herokuapp.com/img/logo.png" class="logo" alt="logo">
+    </a>
+</div>
 
 <div class="login-wrapper">
     <div class="box-success">
         <div class="content-wrap">
-            <h2>Your registration was successfull, but your account is not activated.</h2>
+            <h2>Registration Successful.</h2>
 
             <p>
-                Email message with instructions has been sent to @ViewBag.email.
-                You will receive this message instantly (or in 5-10 minutes).
+                Thank you for signing up with us.   
             </p>
 
             <p>
-                Please, check your mailbox to activate your account.
-                If the mail message with account activation did not received for a long time,
-                check your Junk folder. Also check email adddress service@somecompany.com is not in black list of your mailbox.
+                Now you can sell your cars easily and enjoy unlimited listings through itemsss.com.
+            </p>
+
+            <p>
+                You will be redirected to the user control panel in 60 seconds. Click here if the browser does not automatically redirect.
             </p>
 
         </div>

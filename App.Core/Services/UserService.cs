@@ -22,6 +22,7 @@ namespace App.Core.Services
         // Membership
         void Save(App.Core.Data.Membership membership, bool add);
         App.Core.Data.Membership GetMembership(int userId);
+        App.Core.Data.Membership GetMembershipByConfirmToken(string token, bool withUserProfile);
 
         // Emails
         void SendAccountActivationMail(string email);
@@ -78,6 +79,16 @@ namespace App.Core.Services
         App.Core.Data.Membership IUserService.GetMembership(int userId)
         {
             return this.db.Memberships.FirstOrDefault(x => x.UserId == userId);
+        }
+
+        App.Core.Data.Membership IUserService.GetMembershipByConfirmToken(string token, bool withUserProfile)
+        {
+            var membership = this.db.Memberships.FirstOrDefault(x => x.EmailConfirmationToken.Equals(token.ToLower()));
+            if (membership != null && withUserProfile)
+            {
+                membership.UserProfile = this.db.UserProfiles.First(x => x.UserId == membership.UserId);
+            }
+            return membership;
         }
 
         void IUserService.SendAccountActivationMail(string email)

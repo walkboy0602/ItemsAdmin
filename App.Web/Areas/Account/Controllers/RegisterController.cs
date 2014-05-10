@@ -15,12 +15,12 @@ namespace App.Web.Areas.Account.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly IUserService usersService;
+        private readonly IUserService userService;
         //private readonly IEmailService emailService;
 
-        public RegisterController(IUserService usersService)
+        public RegisterController(IUserService userService)
         {
-            this.usersService = usersService;
+            this.userService = userService;
             //this.emailService = emailService;
         }
 
@@ -28,6 +28,10 @@ namespace App.Web.Areas.Account.Controllers
         // GET: /Account/Register/
         public ActionResult Index()
         {
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
             return View();
         }
 
@@ -48,10 +52,11 @@ namespace App.Web.Areas.Account.Controllers
                         propertyValues: new 
                         {  
                             FirstName = model.FirstName,
-                            LastName = model.LastName
+                            LastName = model.LastName,
+                            Mobile = model.Mobile
                         }, requireConfirmationToken: true);
 
-                    //this.usersService.SendAccountActivationMail(model.Email);
+                    //this.userService.SendAccountActivationMail(model.Email);
 
                     return RedirectToAction("success", "register", new { email = model.Email, area = "account" });
                 }

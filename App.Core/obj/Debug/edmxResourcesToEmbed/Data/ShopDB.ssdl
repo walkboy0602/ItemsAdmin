@@ -112,9 +112,9 @@ warning 6002: The table/view 'ShopDB.dbo.ListingImageDeleted' does not have a pr
       <PropertyRef Name="UserId" />
     </Key>
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
     <Property Name="EmailConfirmationToken" Type="nvarchar" MaxLength="128" />
-    <Property Name="IsEmailConfirmed" Type="bit" />
+    <Property Name="IsEmailConfirmed" Type="bit" Nullable="false" />
     <Property Name="LastPasswordFailureDate" Type="datetime" />
     <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
     <Property Name="PasswordChangedDate" Type="datetime" />
@@ -123,6 +123,12 @@ warning 6002: The table/view 'ShopDB.dbo.ListingImageDeleted' does not have a pr
     <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
     <Property Name="IsMobileConfirmed" Type="bit" />
     <Property Name="IsIdentificationConfirmed" Type="bit" />
+    <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+    <Property Name="IsOnline" Type="bit" Nullable="false" />
+    <Property Name="LastLoginDate" Type="datetime" />
+    <Property Name="LastPasswordChangedDate" Type="datetime" />
+    <Property Name="LastLockoutDate" Type="datetime" />
+    <Property Name="Comment" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="OAuthMembership">
     <Key>

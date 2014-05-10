@@ -31,6 +31,7 @@ namespace App.Web.Areas.Account.Controllers
 
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
+                int currentuserid = WebSecurity.GetUserId(model.UserName);
                 return Url.IsLocalUrl(returnUrl) ? (ActionResult)Redirect(returnUrl) : RedirectToAction("Index", "Category", new { area = "" });
             }
 

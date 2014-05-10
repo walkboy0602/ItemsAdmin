@@ -208,6 +208,12 @@
     <EntitySetMapping Name="Memberships">
       <EntityTypeMapping TypeName="ShopDBModel.Membership">
         <MappingFragment StoreEntitySet="Membership">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
           <ScalarProperty Name="IsIdentificationConfirmed" ColumnName="IsIdentificationConfirmed" />
           <ScalarProperty Name="IsMobileConfirmed" ColumnName="IsMobileConfirmed" />
           <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />

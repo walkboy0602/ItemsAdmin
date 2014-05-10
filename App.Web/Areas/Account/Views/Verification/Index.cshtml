@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="header-row">
+            <div class="header-main">
+                <span>Please verify your information</span>
+            </div>
+        </div>
+        <table class="table table-no-bordered td-valign-top">
+            <tbody>
+                <!--Phone Verification-->
+                <tr>
+                    <td><h4>1.</h4></td>
+                    <td>
+                        <i class="fa fa-mobile fa-3x pull-left"></i>
+                        <div class="verification-desc">
+                            <h4>
+                                Mobile Phone Verification
+                                <small>
+                                    <span class="well well-sm">
+                                        010-1321235
+                                    </span>
+                                    <a href="#" class="margin-left-20">Change</a>
+                                </small>
+                            </h4>
+                        </div>
+                        <div class="verification-desc pull-left">
+                            An SMS verification code will be sent to you mobile phone number. Enter the code received to verify your mobile phone number.
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn-glow inverse">
+                            <span><i class="fa fa-share"></i> Verify Now</span>
+                        </button>
+                        <div class="bright-grey margin-top-10"><i class="fa fa-times margin-left-20"></i> Unverified</div>
+                    </td>
+                </tr>
+                <!--Email Verification-->
+                <tr>
+                    <td><h4>2.</h4></td>
+                    <td>
+                        <div class="verification-desc">
+                            <i class="fa fa-envelope fa-2x pull-left"></i>
+                            <h4>
+                                Email Address Verification
+                                <small>
+                                    <span class="well well-sm">
+                                        @User.Identity.Name
+                                    </span>
+                                    <a href="#" class="margin-left-20">Change</a>
+                                </small>
+                            </h4>
+                        </div>
+                        <div class="verification-desc pull-left">
+                            A verification email will be sent to your registered email address.
+                            Follow the instructions in the email to proceed.
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn-glow inverse">
+                            <span><i class="fa fa-share"></i> Verify Now</span>
+                        </button>
+                        <div class="bright-grey margin-top-10"><i class="fa fa-times margin-left-20"></i> Unverified</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

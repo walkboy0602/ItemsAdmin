@@ -20,11 +20,11 @@ public partial class Membership
 
     public int UserId { get; set; }
 
-    public Nullable<System.DateTime> CreateDate { get; set; }
+    public System.DateTime CreateDate { get; set; }
 
     public string EmailConfirmationToken { get; set; }
 
-    public Nullable<bool> IsEmailConfirmed { get; set; }
+    public bool IsEmailConfirmed { get; set; }
 
     public Nullable<System.DateTime> LastPasswordFailureDate { get; set; }
 
@@ -41,6 +41,18 @@ public partial class Membership
     public Nullable<bool> IsMobileConfirmed { get; set; }
 
     public Nullable<bool> IsIdentificationConfirmed { get; set; }
+
+    public bool IsLockedOut { get; set; }
+
+    public bool IsOnline { get; set; }
+
+    public Nullable<System.DateTime> LastLoginDate { get; set; }
+
+    public Nullable<System.DateTime> LastPasswordChangedDate { get; set; }
+
+    public Nullable<System.DateTime> LastLockoutDate { get; set; }
+
+    public string Comment { get; set; }
 
 }
 

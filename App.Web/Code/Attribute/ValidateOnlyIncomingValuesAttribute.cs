@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace App.Web.Code.Filters
+namespace App.Web.Code.Attribute
 {
     public class ValidateOnlyIncomingValuesAttribute : ActionFilterAttribute
     {
