@@ -9,10 +9,11 @@ using System.Web.Mvc;
 using App.Core.Data;
 using App.Core.Services;
 using App.Core.ViewModel;
+using App.Web.Code.Attribute;
 
 namespace App.Web.Controllers
 {
-    [Authorize]
+    [MembershipAuthorize]
     public class CategoryController : Controller
     {
         private ICategoryService _categoryService;

@@ -11,6 +11,7 @@ using System.Web.Security;
 using WebMatrix.WebData;
 using System.Web.Mvc;
 using System.Collections.Specialized;
+using System.Web.Caching;
 
 namespace App.Web.Code.Membership
 {
@@ -19,6 +20,7 @@ namespace App.Web.Code.Membership
         //
         // Properties from web.config, default all to False
         //
+        private int _cacheTimeoutInMinutes = 30;
         private string _ApplicationName;
         private bool _EnablePasswordReset;
         private bool _EnablePasswordRetrieval = false;
@@ -127,29 +129,30 @@ namespace App.Web.Code.Membership
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets information from the data source for a user, including UserProfile.
+        /// Insert into UserData_{username} cache.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.Web.Security.MembershipUser"/> object populated with the specified user's information from the data source.
+        /// </returns>
+        /// <param name="username">The name of the user to get information for. </param>
+        /// <param name="userIsOnline">true to update the last-activity date/time stamp for the user; false to return user information without updating the last-activity date/time stamp for the user. </param>
         public override System.Web.Security.MembershipUser GetUser(string username, bool userIsOnline)
         {
-            var userProfile = this.usersService.GetUserProfile(username);
-            var user = this.usersService.GetMembership(userProfile.UserId);
+            var cacheKey = string.Format("UserData_{0}", username);
 
-            string passwordQuestion = string.Empty;
+            if (HttpRuntime.Cache[cacheKey] != null)
+                return (CustomMembershipUser)HttpRuntime.Cache[cacheKey];
 
-            //Convert to MembershipUser
-            MembershipUser membership = new MembershipUser("CustomMembershipProvider",
-                                            userProfile.LastName,
-                                            userProfile.UserId,
-                                            userProfile.UserName,
-                                            passwordQuestion,
-                                            user.Comment,
-                                            user.IsEmailConfirmed,
-                                            user.IsLockedOut,
-                                            user.CreateDate,
-                                            user.LastLoginDate ?? DateTime.MinValue,
-                                            user.LastLoginDate ?? DateTime.MinValue, 
-                                            user.LastPasswordChangedDate ?? DateTime.MinValue,
-                                            user.LastLockoutDate ?? DateTime.MinValue);
+            var user = this.usersService.GetMembership(username);
 
-            return membership;
+            var membershipUser = new CustomMembershipUser(user);
+
+            //Store in cache
+            HttpRuntime.Cache.Insert(cacheKey, membershipUser, null, DateTime.Now.AddMinutes(_cacheTimeoutInMinutes), Cache.NoSlidingExpiration);
+
+            return membershipUser;
         }
 
         public override System.Web.Security.MembershipUser GetUser(object providerUserKey, bool userIsOnline)

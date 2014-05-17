@@ -33,6 +33,10 @@ namespace App.Web
             FilterProviders.Providers.Add(provider);
             /// End Filter Injection
 
+            //container.RegisterType<MembershipAuthorize>(new InjectionMember[]
+            //{
+            //    new InjectionProperty("userService", new ResolvedParameter<IUserService>())
+            //});
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers

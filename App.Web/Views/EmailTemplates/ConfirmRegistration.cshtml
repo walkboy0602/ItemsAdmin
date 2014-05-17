@@ -3,18 +3,19 @@
 @{ 
     var membership = (App.Core.Data.Membership)ViewBag.Membership;
     var sendEmailModel = (App.Core.Models.SendEmailModel)ViewBag.SendEmailModel; 
-    var activationLink = sendEmailModel.WebsiteURL + Url.Action("confirmation", "register", new { guid = membership.EmailConfirmationToken, area = "account" }); 
+    var activationLink = sendEmailModel.WebsiteURL + Url.Action("confirmation", "verification", new { guid = membership.EmailConfirmationToken, area = "account" }); 
 }
 
 <p>
 Dear @Model.LastName,
 </p>
-<p></p>
+<br />
 <p>
     With your email address it was registered new account at <a href="@sendEmailModel.WebsiteURL">@sendEmailModel.WebsiteUrlName</a>.<br />
     To activate your account, go tob the link:<br />
     <a href="@activationLink ">@activationLink</a>
 </p>
+<br />
 <p>
     If you did not perform a registration new account just ignore this email message, maybe someone made a mistake.
 </p>
@@ -27,7 +28,7 @@ Dear @Model.LastName,
 <br />
 <br />
 <p>
-    Best regards,<br />
+    ohMyBazzar - Everything Store
     <a href="@sendEmailModel.WebsiteURL">@sendEmailModel.WebsiteUrlName</a>.<br />
 </p>
 

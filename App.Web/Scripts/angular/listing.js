@@ -233,6 +233,15 @@ function ListingSpecCtrl($scope, $q, ListingFactory, $filter) {
     );
 
 
+    //init validation
+    var isValid = false;
+    var validate = jQuery("form").validationEngine({
+        prettySelect: true,
+        onValidationComplete: function (form, status) {
+            isValid = status;
+        }
+    });
+
     $scope.saveNew = function () {
         validate.validationEngine('validate');
 

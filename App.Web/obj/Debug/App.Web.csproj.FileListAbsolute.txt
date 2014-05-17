@@ -118,7 +118,6 @@ C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\EntityFramework.dl
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\EntityFramework.SqlServer.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Data.Edm.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Data.OData.dll
-C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Practices.ServiceLocation.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Practices.Unity.Configuration.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Practices.Unity.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Web.Infrastructure.dll
@@ -154,8 +153,6 @@ C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\EntityFramework.xm
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\EntityFramework.SqlServer.xml
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Data.Edm.xml
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Data.OData.xml
-C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Practices.ServiceLocation.pdb
-C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Practices.ServiceLocation.xml
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Practices.Unity.xml
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Practices.Unity.Configuration.xml
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Web.WebPages.OAuth.xml
@@ -211,3 +208,5 @@ C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Autofac.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Autofac.Integration.Mvc.dll
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Autofac.xml
 C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Autofac.Integration.Mvc.xml
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\Users\kho001\Documents\GitHub\Items\ItemsAdmin\App.Web\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml

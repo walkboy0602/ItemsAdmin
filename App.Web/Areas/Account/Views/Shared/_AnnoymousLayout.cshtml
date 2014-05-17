@@ -12,8 +12,14 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
 </head>
 <body data-ng-app="shopApp">
-    @RenderBody()
-
+    <header class="header">
+        <a href="http://detail.herokuapp.com/index.html">
+            <img src="http://detail.herokuapp.com/img/logo.png" class="logo" alt="logo">
+        </a>
+    </header>
+    <div class="container">
+        @RenderBody()
+    </div>
     @Scripts.Render("~/bundles/common")
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angularstrap")

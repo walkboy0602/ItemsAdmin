@@ -70,7 +70,8 @@ namespace App.Web
                  "~/Scripts/angular/directive.js",
                  "~/Scripts/angular/ui-bootstrap-tpls-0.6.0.js",
                  "~/Scripts/angular/user.js",
-                 "~/Scripts/angular/listing.js"
+                 "~/Scripts/angular/listing.js",
+                 "~/Scripts/angular/account.js"
                  ));
 
             //AngularStrap
@@ -117,6 +118,7 @@ namespace App.Web
                         "~/Content/themes/admin/libraries/validationEngine.jquery.css",
                         "~/Content/themes/admin/global/layout.css",
                         "~/Content/themes/admin/global/elements.css",
+                        "~/Content/themes/admin/global/ui-elements.css",
                         "~/Content/themes/admin/global/icons.css",
                         "~/Content/themes/admin/global/table.css",
                         "~/Content/themes/admin/global/custom.css",

@@ -21,6 +21,7 @@ body {
   height: 75px;
   text-align: center;
   padding-top: 28px;
+  margin-bottom: 0;
 }
 
 .signup-wrapper {
@@ -28,6 +29,7 @@ body {
   left: 0;
   right: 0;
   text-align: center;
+  margin: 60px auto;
 }
 .signup-wrapper .logo {
   margin-bottom: 45px;

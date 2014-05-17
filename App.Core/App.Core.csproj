@@ -223,6 +223,7 @@
     <Compile Include="Utility\DataAnnotations.cs" />
     <Compile Include="ViewModel\DropDownViewModel.cs" />
     <Compile Include="ViewModel\ListingCategoryViewModel.cs" />
+    <Compile Include="ViewModel\UserMembership.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

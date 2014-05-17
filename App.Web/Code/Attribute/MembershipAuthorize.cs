@@ -7,31 +7,34 @@ using App.Core.Services;
 using Microsoft.Practices.Unity;
 using WebMatrix.WebData;
 using System.Web.Routing;
+using App.Web.Code.Membership;
 
 namespace App.Web.Code.Attribute
 {
-    public class MembershipAuthorize: AuthorizeAttribute
+    public class MembershipAuthorize : AuthorizeAttribute
     {
         [Dependency]
         public IUserService userService { get; set; }
 
-        public override void OnAuthorization(AuthorizationContext filterContext)
+        public override void OnAuthorization(AuthorizationContext context)
         {
-            base.OnAuthorization(filterContext);
+            base.OnAuthorization(context);
 
-            int d = filterContext.HttpContext.User.Identity.GetHashCode();
-            int userId = WebSecurity.GetUserId(filterContext.HttpContext.User.Identity.Name);
-
-            var membership = userService.GetMembership(userId);
-
-            if (!membership.IsEmailConfirmed)
+            if (context.HttpContext.User.Identity.IsAuthenticated)
             {
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+                //var membership = userService.GetMembership(context.HttpContext.User.Identity.Name);
+
+                var identity = context.HttpContext.User.ToCustomPrincipal().CustomIdentity;
+
+                if (!identity.isEmailConfirmed)
                 {
-                    action = "Index",
-                    controller = "Verification",
-                    area = "Account"
-                }));
+                    context.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+                    {
+                        action = "Index",
+                        controller = "Verification",
+                        area = "Account"
+                    }));
+                }
             }
         }
 

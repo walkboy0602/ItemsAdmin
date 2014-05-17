@@ -4,17 +4,8 @@
 angular.module('shopAPI', [])
     .factory('AccountFactory', ['$http', function ($http) {
         return {
-            register: function (data) {
-                return $http.post('/account/register', data);
-            },
-            login: function (data) {
-                return $http.post('/api/user/login', data);
-            },
-            logout: function (data) {
-                return $http.post('/api/user/logout', data);
-            },
-            validateEmail: function (data) {
-                return $http.post('/account/ValidateEmail', data);
+            emailVerification: function(){
+                return $http.post('/account/verification/sendemail');
             }
         }
     }])

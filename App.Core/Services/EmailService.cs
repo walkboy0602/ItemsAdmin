@@ -135,6 +135,9 @@ namespace App.Core.Services
                 mailMessage.To.Add(new MailAddress(emailAddress));
             }
 
+            // Sender
+            mailMessage.Sender = new MailAddress("walkboy0602@gmail.com");
+
             // From
             mailMessage.From = new MailAddress(emailHostModel.EmailFrom, this.configService.GetValue(ConfigName.WebsiteTitle));
 

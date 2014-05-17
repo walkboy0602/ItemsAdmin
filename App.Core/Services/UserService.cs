@@ -8,7 +8,7 @@ using System.Text;
 using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
-
+using App.Core.ViewModel;
 
 namespace App.Core.Services
 {
@@ -21,6 +21,7 @@ namespace App.Core.Services
 
         // Membership
         void Save(App.Core.Data.Membership membership, bool add);
+        App.Core.Data.Membership GetMembership(string userName);
         App.Core.Data.Membership GetMembership(int userId);
         App.Core.Data.Membership GetMembershipByConfirmToken(string token, bool withUserProfile);
 
@@ -74,6 +75,22 @@ namespace App.Core.Services
             }
 
             this.db.SaveChanges();
+        }
+
+        App.Core.Data.Membership IUserService.GetMembership(string userName)
+        {
+            App.Core.Data.Membership membership = null;
+
+            var userProfile = this.db.UserProfiles.FirstOrDefault(x => x.UserName.Equals(userName));
+
+            if (userProfile != null)
+            {
+                membership = this.db.Memberships.FirstOrDefault(x => x.UserId == userProfile.UserId);
+
+                membership.UserProfile = userProfile;
+            }
+
+            return membership;
         }
 
         App.Core.Data.Membership IUserService.GetMembership(int userId)

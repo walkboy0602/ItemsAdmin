@@ -1,4 +1,5 @@
-﻿@{
+﻿@model App.Core.Data.Membership
+@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -9,7 +10,7 @@
                 <span>Please verify your information</span>
             </div>
         </div>
-        <table class="table table-no-bordered td-valign-top">
+        <table class="table table-no-bordered td-valign-top" data-ng-controller="VerificationCtrl">
             <tbody>
                 <!--Phone Verification-->
                 <tr>
@@ -21,7 +22,7 @@
                                 Mobile Phone Verification
                                 <small>
                                     <span class="well well-sm">
-                                        010-1321235
+                                        @Html.DisplayTextFor(m => m.UserProfile.Mobile)
                                     </span>
                                     <a href="#" class="margin-left-20">Change</a>
                                 </small>
@@ -48,9 +49,13 @@
                                 Email Address Verification
                                 <small>
                                     <span class="well well-sm">
-                                        @User.Identity.Name
+                                        @Html.DisplayTextFor(m => m.UserProfile.UserName)
                                     </span>
-                                    <a href="#" class="margin-left-20">Change</a>
+
+                                    @if (!Model.IsEmailConfirmed)
+                                    {
+                                        <a href="#" class="margin-left-20">Change</a>
+                                    }
                                 </small>
                             </h4>
                         </div>
@@ -60,13 +65,43 @@
                         </div>
                     </td>
                     <td>
-                        <button class="btn-glow inverse">
-                            <span><i class="fa fa-share"></i> Verify Now</span>
-                        </button>
-                        <div class="bright-grey margin-top-10"><i class="fa fa-times margin-left-20"></i> Unverified</div>
+                        @if (Model.IsEmailConfirmed)
+                        {
+                            <h5 class="green bright-grey margin-top-10"><i class="fa fa-check margin-left-20"></i> Verified</h5>
+                        }
+                        else
+                        {
+                            <button class="btn-glow inverse" data-ng-click="sendEmail()">
+                                <span><i class="fa fa-share"></i> Verify Now</span>
+                            </button>
+                            <div class="bright-grey margin-top-10"><i class="fa fa-times margin-left-20"></i> Unverified</div>
+                        }
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- Modal - Email Trigger -->
+        <div class="modal fade" id="verification-email" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3><i class="fa fa-envelope"></i> Email Address Verification</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info center margin-top-20">
+                            <label>
+                                An email has been sent to your mailbox.
+                                Please follow the instructions in the email to complete the email verification process.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
     </div>
 </div>

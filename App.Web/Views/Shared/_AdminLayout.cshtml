@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using App.Web.Code.Membership
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,25 +13,6 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
 </head>
 <body data-ng-app="shopApp">
-    @*<header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>*@
     <!-- navbar -->
     <header class="navbar navbar-inverse" role="banner">
         <div class="navbar-header">
@@ -134,32 +116,51 @@
                         </div>
                     </div>
                 </li>
-                <li class="dropdown">
-                    <a href="http://detail.herokuapp.com/form-showcase.html#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                        @if (Request.IsAuthenticated)
-                    {
-
-                        @User.Identity.Name
-                    }
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="http://detail.herokuapp.com/personal-info.html">Personal info</a></li>
-                        <li><a href="http://detail.herokuapp.com/form-showcase.html#">Account settings</a></li>
-                        <li><a href="http://detail.herokuapp.com/form-showcase.html#">Billing</a></li>
-                        <li><a href="http://detail.herokuapp.com/form-showcase.html#">Export your data</a></li>
-                        <li><a href="http://detail.herokuapp.com/form-showcase.html#">Send feedback</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown settings hidden-xs hidden-sm">
-                    <a href="http://detail.herokuapp.com/form-showcase.html#" role="button" data-toggle="dropdown">
+                @if (Request.IsAuthenticated)
+                {
+                    var identity = HttpContext.Current.User.ToCustomPrincipal().CustomIdentity;
+                    <li class="notification-dropdown hidden-xs hidden-sm">
+                        <a href="http://detail.herokuapp.com/form-showcase.html#" class="trigger">
+                            @identity.Name
+                            <b class="caret"></b>
+                        </a>
+                        <div class="pop-dialog">
+                            <div class="pointer right">
+                                <div class="arrow"></div>
+                                <div class="arrow_border"></div>
+                            </div>
+                            <div class="body">
+                                <div class="menu">
+                                    <a href="http://detail.herokuapp.com/personal-info.html#" class="item">Profile</a>
+                                    <a href="http://detail.herokuapp.com/form-showcase.html#" class="item">Account settings</a>
+                                    <a href="http://detail.herokuapp.com/form-showcase.html#" class="item">Billing</a>
+                                    <a href="http://detail.herokuapp.com/form-showcase.html#" class="item">Export your data</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+                <li class="notification-dropdown hidden-xs hidden-sm">
+                    <a href="http://detail.herokuapp.com/form-showcase.html#" class="trigger">
                         <i class="fa fa-cog"></i>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="http://detail.herokuapp.com/personal-info.html">Personal info</a></li>
-                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                    </ul>
+                    <div class="pop-dialog">
+                        <div class="pointer right">
+                            <div class="arrow"></div>
+                            <div class="arrow_border"></div>
+                        </div>
+                        <div class="body">
+                            <div class="menu">
+                                <a href="#" class="item">Deals</a>
+                                <a href="#" class="item">Terms of service</a>
+                                <a href="#" class="item">Privacy policy</a>
+                                <a href="#" class="item">Send feedback</a>
+                                <div class="footer">
+                                    <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
 
             </ul>
@@ -196,10 +197,6 @@
                 </li>
                 <li>
                     <a class="dropdown-toggle" href="http://detail.herokuapp.com/form-showcase.html#">
-                        <div class="pointer">
-                            <div class="arrow"></div>
-                            <div class="arrow_border"></div>
-                        </div>
                         <i class="fa fa-edit"></i>
                         <span>Forms</span>
                         <i class="fa fa-chevron-down"></i>
@@ -273,11 +270,6 @@
         </div>
         <!-- end main container -->
         <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-                </div>
-            </div>
         </footer>
     </div>
 

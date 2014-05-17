@@ -10,10 +10,10 @@
 
 .login-wrapper {
   position: absolute;
-  top: 90px;
   left: 0;
   right: 0;
   text-align: center;
+  margin: 60px auto;
 }
 .login-wrapper .logo {
   margin-bottom: 45px;
